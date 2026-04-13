@@ -1,2 +1,8 @@
 .codex/
 documentation/online_efficient_dense_retrieval_docs/2_implementation_plan.md
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+results/runs/
+checkpoints/
