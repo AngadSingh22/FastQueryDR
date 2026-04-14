@@ -23,6 +23,11 @@ def select_device(requested: str) -> torch.device:
     return torch.device(requested)
 
 
+def synchronize_device(device: torch.device) -> None:
+    if device.type == "cuda":
+        torch.cuda.synchronize(device)
+
+
 def prepare_run_dir(output_dir: str, experiment_name: str) -> Path:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_dir = Path(output_dir) / f"{experiment_name}_{timestamp}"

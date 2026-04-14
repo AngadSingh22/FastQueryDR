@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import random
 
 import torch
 from torch.utils.data import Dataset
@@ -45,7 +46,12 @@ def _read_triples(path: str | Path, limit: int) -> list[TripleExample]:
     return examples
 
 
-def build_train_val_datasets(path: str | Path, max_examples: int, val_examples: int) -> tuple[TriplesDataset, TriplesDataset]:
+def build_train_val_datasets(
+    path: str | Path,
+    max_examples: int,
+    val_examples: int,
+    seed: int,
+) -> tuple[TriplesDataset, TriplesDataset]:
     if val_examples >= max_examples:
         raise ValueError("val_examples must be smaller than max_train_examples")
 
@@ -53,6 +59,7 @@ def build_train_val_datasets(path: str | Path, max_examples: int, val_examples: 
     if len(examples) <= val_examples:
         raise ValueError("Loaded examples are insufficient to create the requested validation split")
 
+    random.Random(seed).shuffle(examples)
     val_set = TriplesDataset(examples[:val_examples])
     train_set = TriplesDataset(examples[val_examples:])
     return train_set, val_set
@@ -65,11 +72,13 @@ class TriplesCollator:
         text_max_length: int,
         query_prefix: str = "",
         passage_prefix: str = "",
+        include_negatives: bool = True,
     ) -> None:
         self.tokenizer = tokenizer
         self.text_max_length = text_max_length
         self.query_prefix = query_prefix
         self.passage_prefix = passage_prefix
+        self.include_negatives = include_negatives
 
     def _tokenize(self, texts: list[str]) -> dict[str, torch.Tensor]:
         return self.tokenizer(
@@ -83,10 +92,11 @@ class TriplesCollator:
     def __call__(self, batch: list[TripleExample]) -> dict[str, dict[str, torch.Tensor]]:
         queries = [f"{self.query_prefix}{item.query}" for item in batch]
         positives = [f"{self.passage_prefix}{item.positive}" for item in batch]
-        negatives = [f"{self.passage_prefix}{item.negative}" for item in batch]
-
-        return {
+        collated = {
             "query_inputs": self._tokenize(queries),
             "positive_inputs": self._tokenize(positives),
-            "negative_inputs": self._tokenize(negatives),
         }
+        if self.include_negatives:
+            negatives = [f"{self.passage_prefix}{item.negative}" for item in batch]
+            collated["negative_inputs"] = self._tokenize(negatives)
+        return collated

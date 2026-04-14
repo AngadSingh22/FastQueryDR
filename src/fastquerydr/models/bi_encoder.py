@@ -12,7 +12,7 @@ class SymmetricBiEncoder(nn.Module):
         self.encoder = AutoModel.from_pretrained(encoder_name)
         self.pooling = pooling
         self.normalize = normalize
-        self.temperature = nn.Parameter(torch.tensor(1.0))
+        self.temperature = nn.Parameter(torch.tensor(0.0))
 
     def encode(self, inputs: dict[str, torch.Tensor]) -> torch.Tensor:
         outputs = self.encoder(**inputs)
@@ -31,8 +31,11 @@ class SymmetricBiEncoder(nn.Module):
             embeddings = F.normalize(embeddings, p=2, dim=-1)
         return embeddings
 
+    def similarity(self, query_embeddings: torch.Tensor, passage_embeddings: torch.Tensor) -> torch.Tensor:
+        scale = self.temperature.exp().clamp(max=100.0)
+        return query_embeddings @ passage_embeddings.transpose(0, 1) * scale
+
     def forward(self, query_inputs: dict[str, torch.Tensor], passage_inputs: dict[str, torch.Tensor]) -> torch.Tensor:
         queries = self.encode(query_inputs)
         passages = self.encode(passage_inputs)
-        scale = self.temperature.exp().clamp(max=100.0)
-        return queries @ passages.transpose(0, 1) * scale
+        return self.similarity(queries, passages)

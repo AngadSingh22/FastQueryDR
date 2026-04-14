@@ -1,5 +1,5 @@
 experiment:
-  name: teacher_bge_base_msmarco_mini
+  name: teacher_bge_base_msmarco_phase2
   output_dir: results/runs
   seed: 13
 
@@ -29,3 +29,18 @@ training:
   num_workers: 0
   mixed_precision: false
   device: auto
+
+retrieval:
+  enabled: true
+  corpus_path: data/msmarco/corpus.tsv
+  query_path: data/msmarco/dev_queries.tsv
+  qrels_path: data/msmarco/dev_qrels.tsv
+  batch_size: 64
+  top_k: 100
+  save_embeddings: false
+  latency:
+    enabled: true
+    warmup_queries: 20
+    measured_queries: 100
+    query_batch_size: 1
+    search_top_k: 100

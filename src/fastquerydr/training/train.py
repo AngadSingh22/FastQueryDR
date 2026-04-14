@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import torch
@@ -14,6 +15,7 @@ from transformers import AutoTokenizer, get_linear_schedule_with_warmup
 from fastquerydr.config import AppConfig, load_config
 from fastquerydr.data import TriplesCollator, build_train_val_datasets
 from fastquerydr.models import SymmetricBiEncoder
+from fastquerydr.retrieval import run_retrieval_pipeline
 from fastquerydr.utils.repro import prepare_run_dir, seed_everything, select_device
 
 
@@ -35,12 +37,14 @@ def build_dataloaders(config: AppConfig, tokenizer):
         path=config.data.train_path,
         max_examples=config.data.max_train_examples,
         val_examples=config.data.val_examples,
+        seed=config.experiment.seed,
     )
     collator = TriplesCollator(
         tokenizer=tokenizer,
         text_max_length=config.data.text_max_length,
         query_prefix=config.data.query_prefix,
         passage_prefix=config.data.passage_prefix,
+        include_negatives=False,
     )
     train_loader = DataLoader(
         train_dataset,
@@ -60,9 +64,9 @@ def build_dataloaders(config: AppConfig, tokenizer):
 
 
 def compute_loss(model: SymmetricBiEncoder, batch: dict[str, dict[str, torch.Tensor]], criterion: nn.Module) -> torch.Tensor:
-    positive_logits = model(batch["query_inputs"], batch["positive_inputs"])
-    negative_logits = model(batch["query_inputs"], batch["negative_inputs"])
-    logits = torch.cat([positive_logits, negative_logits], dim=1)
+    query_embeddings = model.encode(batch["query_inputs"])
+    positive_embeddings = model.encode(batch["positive_inputs"])
+    logits = model.similarity(query_embeddings, positive_embeddings)
     labels = torch.arange(logits.size(0), device=logits.device)
     return criterion(logits, labels)
 
@@ -107,7 +111,8 @@ def main() -> None:
         lr=config.training.learning_rate,
         weight_decay=config.training.weight_decay,
     )
-    total_updates = (len(train_loader) * config.training.num_epochs) // config.training.grad_accumulation_steps
+    updates_per_epoch = math.ceil(len(train_loader) / config.training.grad_accumulation_steps)
+    total_updates = updates_per_epoch * config.training.num_epochs
     warmup_steps = int(total_updates * config.training.warmup_ratio)
     scheduler = get_linear_schedule_with_warmup(
         optimizer=optimizer,
@@ -115,7 +120,7 @@ def main() -> None:
         num_training_steps=max(total_updates, 1),
     )
     criterion = nn.CrossEntropyLoss()
-    scaler = torch.cuda.amp.GradScaler(enabled=config.training.mixed_precision and device.type == "cuda")
+    scaler = torch.amp.GradScaler(device.type, enabled=config.training.mixed_precision and device.type == "cuda")
 
     best_val_loss = float("inf")
     global_step = 0
@@ -127,7 +132,7 @@ def main() -> None:
             global_step += 1
             batch = move_batch_to_device(batch, device)
 
-            with torch.cuda.amp.autocast(enabled=config.training.mixed_precision and device.type == "cuda"):
+            with torch.amp.autocast(device_type=device.type, enabled=config.training.mixed_precision and device.type == "cuda"):
                 loss = compute_loss(model, batch, criterion)
                 scaled_loss = loss / config.training.grad_accumulation_steps
 
@@ -163,6 +168,10 @@ def main() -> None:
 
     final_val_loss = evaluate(model, val_loader, criterion, device)
     torch.save(model.state_dict(), run_dir / "last_model.pt")
+    if final_val_loss < best_val_loss:
+        best_val_loss = final_val_loss
+        torch.save(model.state_dict(), run_dir / "best_model.pt")
+
     metrics = {
         "final_val_loss": final_val_loss,
         "best_val_loss": min(best_val_loss, final_val_loss),
@@ -170,6 +179,15 @@ def main() -> None:
     }
     with (run_dir / "metrics.json").open("w", encoding="utf-8") as handle:
         json.dump(metrics, handle, indent=2)
+
+    if config.retrieval is not None and config.retrieval.enabled:
+        retrieval_metrics = run_retrieval_pipeline(
+            config=config,
+            checkpoint_path=str(run_dir / "best_model.pt"),
+            run_dir=run_dir,
+            device=device,
+        )
+        tqdm.write(json.dumps(retrieval_metrics, indent=2))
 
 
 if __name__ == "__main__":

@@ -1,3 +1,16 @@
+Metadata-Version: 2.4
+Name: fastquerydr
+Version: 0.1.0
+Summary: Scaffold for online-efficient dense retrieval experiments
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: faiss-cpu>=1.8
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: psutil>=5.9
+Requires-Dist: torch>=2.2
+Requires-Dist: transformers>=4.39
+Requires-Dist: tqdm>=4.66
+
 # FastQueryDR
 
 Initial scaffold for studying online-efficient dense retrieval via asymmetric query encoders.
@@ -7,8 +20,6 @@ Initial scaffold for studying online-efficient dense retrieval via asymmetric qu
 - Teacher encoder: `BAAI/bge-base-en-v1.5`
 - Initial dataset slice: first `100,000` MS MARCO training triples, with `5,000` held out for validation
 - First objective: symmetric bi-encoder training with in-batch negatives
-- Query encoding uses the standard BGE retrieval instruction prefix: `Represent this sentence for searching relevant passages: `
-- BGE configs use `CLS` pooling and a conservative `1e-5` learning rate to avoid degrading pretrained retrieval behavior during fine-tuning
 
 ## Project Layout
 
@@ -62,10 +73,7 @@ pip install -e .
 python scripts/train_teacher.py --config configs/teacher_msmarco_mini.yaml
 python scripts/run_retrieval_eval.py --config configs/teacher_msmarco_phase2.yaml --checkpoint /path/to/best_model.pt
 python scripts/run_latency_benchmark.py --config configs/teacher_msmarco_phase3.yaml --checkpoint /path/to/best_model.pt
-python scripts/export_retrieval_examples.py --config configs/teacher_msmarco_phase3.yaml --output notes/zero_shot_examples.json
 ```
-
-The first training or evaluation run will also need to download `BAAI/bge-base-en-v1.5` from Hugging Face unless that model is already cached locally.
 
 ## Phase 3 Latency Protocol
 

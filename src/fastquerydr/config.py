@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from typing import Optional
 
 import yaml
 
@@ -47,11 +48,33 @@ class TrainingConfig:
 
 
 @dataclass
+class LatencyConfig:
+    enabled: bool = False
+    warmup_queries: int = 20
+    measured_queries: int = 100
+    query_batch_size: int = 1
+    search_top_k: int = 100
+
+
+@dataclass
+class RetrievalConfig:
+    enabled: bool = False
+    corpus_path: str = ""
+    query_path: str = ""
+    qrels_path: str = ""
+    batch_size: int = 64
+    top_k: int = 100
+    save_embeddings: bool = False
+    latency: Optional[LatencyConfig] = None
+
+
+@dataclass
 class AppConfig:
     experiment: ExperimentConfig
     model: ModelConfig
     data: DataConfig
     training: TrainingConfig
+    retrieval: Optional[RetrievalConfig] = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -66,4 +89,16 @@ def load_config(path: str | Path) -> AppConfig:
         model=ModelConfig(**raw["model"]),
         data=DataConfig(**raw["data"]),
         training=TrainingConfig(**raw["training"]),
+        retrieval=(
+            RetrievalConfig(
+                **{
+                    **raw["retrieval"],
+                    "latency": LatencyConfig(**raw["retrieval"]["latency"])
+                    if "latency" in raw["retrieval"]
+                    else None,
+                }
+            )
+            if "retrieval" in raw
+            else None
+        ),
     )
