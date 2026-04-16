@@ -9,7 +9,6 @@ import psutil
 import torch
 
 from fastquerydr.config import AppConfig
-from fastquerydr.models import SymmetricBiEncoder
 from fastquerydr.utils.repro import synchronize_device
 
 
@@ -21,7 +20,7 @@ def _percentile_ms(samples: list[float], percentile: float) -> float:
 
 @torch.inference_mode()
 def _encode_single_query(
-    model: SymmetricBiEncoder,
+    model: torch.nn.Module,
     tokenizer,
     query_text: str,
     prefix: str,
@@ -36,13 +35,13 @@ def _encode_single_query(
         return_tensors="pt",
     )
     encoded = {key: value.to(device) for key, value in encoded.items()}
-    embedding = model.encode(encoded).detach().cpu().numpy().astype("float32")
+    embedding = model.encode_query(encoded).detach().cpu().numpy().astype("float32")
     return embedding
 
 
 def benchmark_latency(
     config: AppConfig,
-    model: SymmetricBiEncoder,
+    model: torch.nn.Module,
     tokenizer,
     query_ids: list[str],
     query_texts: list[str],

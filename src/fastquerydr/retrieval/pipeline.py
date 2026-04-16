@@ -13,7 +13,7 @@ from transformers import AutoTokenizer
 from fastquerydr.config import AppConfig
 from fastquerydr.data import load_id_text_tsv, load_qrels
 from fastquerydr.retrieval.latency import benchmark_latency
-from fastquerydr.models import SymmetricBiEncoder
+from fastquerydr.models import build_bi_encoder
 from fastquerydr.retrieval.index import build_flat_ip_index
 from fastquerydr.retrieval.metrics import mean_reciprocal_rank_at_k, recall_at_k
 
@@ -21,7 +21,7 @@ from fastquerydr.retrieval.metrics import mean_reciprocal_rank_at_k, recall_at_k
 @dataclass
 class RetrievalArtifacts:
     tokenizer: object
-    model: SymmetricBiEncoder
+    model: torch.nn.Module
     corpus_ids: list[str]
     query_ids: list[str]
     query_texts: list[str]
@@ -34,10 +34,11 @@ class RetrievalArtifacts:
 
 @torch.inference_mode()
 def encode_texts(
-    model: SymmetricBiEncoder,
+    model: torch.nn.Module,
     tokenizer,
     texts: list[str],
     prefix: str,
+    encoder_role: str,
     max_length: int,
     batch_size: int,
     device: torch.device,
@@ -53,7 +54,13 @@ def encode_texts(
             return_tensors="pt",
         )
         encoded = {key: value.to(device) for key, value in encoded.items()}
-        batch_embeddings = model.encode(encoded).detach().cpu().numpy().astype("float32")
+        if encoder_role == "query":
+            batch_tensor = model.encode_query(encoded)
+        elif encoder_role == "passage":
+            batch_tensor = model.encode_passage(encoded)
+        else:
+            raise ValueError(f"Unsupported encoder_role: {encoder_role}")
+        batch_embeddings = batch_tensor.detach().cpu().numpy().astype("float32")
         embeddings.append(batch_embeddings)
     return np.concatenate(embeddings, axis=0)
 
@@ -64,7 +71,7 @@ def rank_documents(index, query_embeddings: np.ndarray, corpus_ids: list[str], t
     return [[corpus_ids[index] for index in row] for row in doc_indices.tolist()]
 
 
-def _resolve_checkpoint(model: SymmetricBiEncoder, checkpoint_path: str | None, device: torch.device) -> None:
+def _resolve_checkpoint(model: torch.nn.Module, checkpoint_path: str | None, device: torch.device) -> None:
     if checkpoint_path is None:
         return
     state_dict = torch.load(checkpoint_path, map_location=device)
@@ -80,11 +87,7 @@ def prepare_retrieval_artifacts(
         raise ValueError("Retrieval config is missing or disabled")
 
     tokenizer = AutoTokenizer.from_pretrained(config.model.encoder_name)
-    model = SymmetricBiEncoder(
-        encoder_name=config.model.encoder_name,
-        pooling=config.model.pooling,
-        normalize=config.model.normalize,
-    ).to(device)
+    model = build_bi_encoder(config.model).to(device)
     _resolve_checkpoint(model, checkpoint_path, device)
     model.eval()
 
@@ -103,6 +106,7 @@ def prepare_retrieval_artifacts(
         tokenizer=tokenizer,
         texts=corpus_texts,
         prefix=config.data.passage_prefix,
+        encoder_role="passage",
         max_length=config.data.text_max_length,
         batch_size=config.retrieval.batch_size,
         device=device,
@@ -149,6 +153,7 @@ def run_retrieval_pipeline(
         tokenizer=artifacts.tokenizer,
         texts=artifacts.query_texts,
         prefix=config.data.query_prefix,
+        encoder_role="query",
         max_length=config.data.text_max_length,
         batch_size=config.retrieval.batch_size,
         device=device,

@@ -17,8 +17,11 @@ class ExperimentConfig:
 @dataclass
 class ModelConfig:
     encoder_name: str
+    architecture: str = "symmetric"
     pooling: str = "mean"
     normalize: bool = True
+    query_num_hidden_layers: Optional[int] = None
+    freeze_document_encoder: bool = False
 
 
 @dataclass
@@ -45,6 +48,8 @@ class TrainingConfig:
     num_workers: int
     mixed_precision: bool
     device: str = "auto"
+    max_steps: Optional[int] = None
+    best_checkpoint_metric: str = "val_loss"
 
 
 @dataclass
@@ -66,6 +71,16 @@ class RetrievalConfig:
     top_k: int = 100
     save_embeddings: bool = False
     latency: Optional[LatencyConfig] = None
+    selection: Optional["RetrievalSelectionConfig"] = None
+
+
+@dataclass
+class RetrievalSelectionConfig:
+    enabled: bool = False
+    query_limit: int = 100
+    corpus_size: int = 5000
+    top_k: int = 100
+    patience: int = 2
 
 
 @dataclass
@@ -95,6 +110,9 @@ def load_config(path: str | Path) -> AppConfig:
                     **raw["retrieval"],
                     "latency": LatencyConfig(**raw["retrieval"]["latency"])
                     if "latency" in raw["retrieval"]
+                    else None,
+                    "selection": RetrievalSelectionConfig(**raw["retrieval"]["selection"])
+                    if "selection" in raw["retrieval"]
                     else None,
                 }
             )
