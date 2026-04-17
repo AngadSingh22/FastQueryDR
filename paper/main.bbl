@@ -1,11 +1,10 @@
 \begin{thebibliography}{1}
 
 \bibitem{bge-base-en-v15-modelcard}
-{Beijing Academy of Artificial Intelligence}.
-\newblock {BAAI/bge-base-en-v1.5}.
-\newblock Hugging Face model card, 2024.
-\newblock Official model card; retrieval instruction and CLS pooling usage are
-  documented there.
+{BAAI}.
+\newblock {BGE-Base} v1.5 model card.
+\newblock Hugging Face, 2024.
+\newblock Model card for \texttt{BAAI/bge-base-en-v1.5}.
 
 \bibitem{chen-etal-2020-simclr}
 Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton.

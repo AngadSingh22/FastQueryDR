@@ -7,3 +7,8 @@ __pycache__/
 results/runs/
 checkpoints/
 data/msmarco/
+paper/*.aux
+paper/*.blg
+paper/*.log
+paper/*.out
+*.zip

@@ -175,17 +175,14 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
 
     by_label = {row["label"]: row for row in rows}
 
-    fig, (ax_global, ax_zoom) = plt.subplots(
-        1,
-        2,
-        figsize=(11.3, 5.2),
-        dpi=260,
-        gridspec_kw={"width_ratios": [1.05, 0.95]},
-        constrained_layout=True,
-    )
+    fig = plt.figure(figsize=(4.65, 7.0), dpi=260, constrained_layout=True)
+    gs = fig.add_gridspec(3, 1, height_ratios=[0.42, 0.95, 1.25])
+    ax_global_top = fig.add_subplot(gs[0, 0])
+    ax_global_bottom = fig.add_subplot(gs[1, 0], sharex=ax_global_top)
+    ax_zoom = fig.add_subplot(gs[2, 0])
     fig.patch.set_facecolor("white")
 
-    for ax in (ax_global, ax_zoom):
+    for ax in (ax_global_top, ax_global_bottom, ax_zoom):
         ax.set_facecolor("#fcfcfc")
         ax.grid(True, which="major", color="#d8dde6", linewidth=0.9, alpha=0.75)
         ax.grid(True, which="minor", color="#eceff4", linewidth=0.6, alpha=0.75)
@@ -194,12 +191,13 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
         ax.spines["right"].set_visible(False)
 
     teacher_ref = by_label["Teacher Zero-Shot"]["mrr_at_10"]
-    ax_global.axhspan(teacher_ref - 0.015, teacher_ref + 0.015, color="#eef4fb", zorder=0)
-    ax_global.text(1.62, teacher_ref + 0.007, "teacher-quality band", fontsize=9.2, color="#4a6d92", ha="left")
+    ax_global_top.axhspan(teacher_ref - 0.015, teacher_ref + 0.015, color="#eef4fb", zorder=0)
+    ax_global_top.text(1.62, teacher_ref + 0.006, "teacher-quality band", fontsize=9.2, color="#4a6d92", ha="left")
 
     for row in rows:
         style = family_styles[row["family"]]
-        ax_global.scatter(
+        target_ax = ax_global_top if row["mrr_at_10"] > 0.2 else ax_global_bottom
+        target_ax.scatter(
             row["query_p50_ms"],
             row["mrr_at_10"],
             s=style["size"],
@@ -213,7 +211,8 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
 
     for label, (dx, dy) in main_label_offsets.items():
         row = by_label[label]
-        ax_global.annotate(
+        target_ax = ax_global_top if row["mrr_at_10"] > 0.2 else ax_global_bottom
+        target_ax.annotate(
             row["label"],
             (row["query_p50_ms"], row["mrr_at_10"]),
             textcoords="offset points",
@@ -226,7 +225,7 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
 
     # Show the best student in the global panel without cluttering the lower cluster.
     best = by_label["Student Q4 Mean"]
-    ax_global.scatter(
+    ax_global_bottom.scatter(
         best["query_p50_ms"],
         best["mrr_at_10"],
         s=230,
@@ -235,20 +234,20 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
         linewidths=2.1,
         zorder=4,
     )
-    ax_global.annotate(
+    ax_global_bottom.annotate(
         "best shallow student",
         xy=(best["query_p50_ms"], best["mrr_at_10"]),
-        xytext=(2.45, 0.18),
+        xytext=(1.48, 0.052),
         fontsize=10,
         color="#14532d",
-        ha="center",
+        ha="left",
         arrowprops={
             "arrowstyle": "-|>",
             "linewidth": 1.5,
             "color": "#2e8b57",
             "shrinkA": 4,
             "shrinkB": 6,
-            "connectionstyle": "arc3,rad=-0.18",
+            "connectionstyle": "arc3,rad=-0.22",
         },
         bbox={"boxstyle": "round,pad=0.28", "facecolor": "#eef8f1", "edgecolor": "#2e8b57", "linewidth": 0.9},
         zorder=5,
@@ -264,22 +263,38 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
         alpha=0.5,
         zorder=1,
     )
-    ax_global.add_patch(zoom_rect)
+    ax_global_bottom.add_patch(zoom_rect)
 
-    ax_global.set_xlim(1.45, 7.45)
-    ax_global.set_ylim(-0.01, 0.81)
-    ax_global.set_xlabel("Query encoding latency p50 (ms)", fontsize=12)
-    ax_global.set_ylabel("MRR@10", fontsize=13)
-    ax_global.text(
-        0.02,
+    ax_global_top.set_xlim(1.45, 7.45)
+    ax_global_bottom.set_xlim(1.45, 7.45)
+    ax_global_top.set_ylim(0.70, 0.79)
+    ax_global_bottom.set_ylim(-0.002, 0.06)
+    ax_global_bottom.set_xlabel("Query encoding latency p50 (ms)", fontsize=12)
+    ax_global_bottom.set_ylabel("MRR@10", fontsize=13)
+    ax_global_top.text(
+        0.01,
         1.02,
         "(a) Global view",
-        transform=ax_global.transAxes,
+        transform=ax_global_top.transAxes,
         fontsize=12,
         fontweight="semibold",
         ha="left",
         va="bottom",
     )
+    plt.setp(ax_global_top.get_xticklabels(), visible=False)
+    ax_global_top.spines["bottom"].set_visible(False)
+    ax_global_bottom.spines["top"].set_visible(False)
+    ax_global_top.tick_params(labeltop=False, bottom=False)
+    ax_global_bottom.tick_params(top=False)
+
+    # Broken-axis marks.
+    d = 0.012
+    kwargs = dict(transform=ax_global_top.transAxes, color="#44546a", clip_on=False, linewidth=1.0)
+    ax_global_top.plot((-d, +d), (-d, +d), **kwargs)
+    ax_global_top.plot((1 - d, 1 + d), (-d, +d), **kwargs)
+    kwargs.update(transform=ax_global_bottom.transAxes)
+    ax_global_bottom.plot((-d, +d), (1 - d, 1 + d), **kwargs)
+    ax_global_bottom.plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)
 
     # Student regime panel.
     student_labels = [
@@ -371,7 +386,7 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
     ax_zoom.set_ylim(-0.002, 0.06)
     ax_zoom.set_xlabel("Query encoding latency p50 (ms)", fontsize=12)
     ax_zoom.text(
-        0.02,
+        0.01,
         1.02,
         "(b) Student regime zoom",
         transform=ax_zoom.transAxes,
@@ -379,57 +394,6 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
         fontweight="semibold",
         ha="left",
         va="bottom",
-    )
-
-    top_link = ConnectionPatch(
-        xyA=(7.35, 0.06),
-        coordsA=ax_global.transData,
-        xyB=(1.55, 0.06),
-        coordsB=ax_zoom.transData,
-        color="#b8c2cc",
-        linewidth=1.0,
-        alpha=0.9,
-    )
-    bottom_link = ConnectionPatch(
-        xyA=(7.35, -0.002),
-        coordsA=ax_global.transData,
-        xyB=(1.55, -0.002),
-        coordsB=ax_zoom.transData,
-        color="#b8c2cc",
-        linewidth=1.0,
-        alpha=0.9,
-    )
-    fig.add_artist(top_link)
-    fig.add_artist(bottom_link)
-
-    legend_handles = []
-    seen = set()
-    for style in family_styles.values():
-        if style["label"] in seen:
-            continue
-        seen.add(style["label"])
-        legend_handles.append(
-            Line2D(
-                [0],
-                [0],
-                marker=style["marker"],
-                color="none",
-                markerfacecolor=style["color"],
-                markeredgecolor=style["edge"],
-                markeredgewidth=1.4,
-                markersize=9,
-                label=style["label"],
-            )
-        )
-    fig.legend(
-        handles=legend_handles,
-        loc="upper center",
-        bbox_to_anchor=(0.5, 1.08),
-        ncol=5,
-        frameon=True,
-        facecolor="white",
-        edgecolor="#d0d7de",
-        fontsize=9,
     )
 
     fig.savefig(path, dpi=260, bbox_inches="tight")

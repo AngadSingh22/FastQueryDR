@@ -1,0 +1,793 @@
+{
+  "checkpoint": null,
+  "model_name": "BAAI/bge-base-en-v1.5",
+  "pooling": "cls",
+  "num_queries": 20,
+  "top_k": 5,
+  "examples": [
+    {
+      "query_id": "2",
+      "query_text": " Androgen receptor define",
+      "relevant_doc_ids": [
+        "4339068"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "4339068",
+          "is_relevant": true,
+          "text": "The androgen receptor (AR), also known as NR3C4 (nuclear receptor subfamily 3, group C, member 4), is a type of nuclear receptor that is activated by binding either of the androgenic hormones, testosterone, or dihydrotestosterone in the cytoplasm and then translocating into the nucleus.n some cell types, testosterone interacts directly with androgen receptors, whereas, in others, testosterone is converted by 5-alpha-reductase to dihydrotestosterone, an even more potent agonist for androgen receptor activation."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7496507",
+          "is_relevant": false,
+          "text": "The gene for the syndrome is on the X chromosome in band Xq11-q12. The gene codes for the androgen receptor (also called the dihydrotestosterone receptor). This gene is mutant in the complete androgen insensitivity syndrome. Because of the mutation, the cells cannot respond to androgen.he gene for the syndrome is on the X chromosome in band Xq11-q12. The gene codes for the androgen receptor (also called the dihydrotestosterone receptor). This gene is mutant in the complete androgen insensitivity syndrome. Because of the mutation, the cells cannot respond to androgen."
+        },
+        {
+          "rank": 3,
+          "doc_id": "3866461",
+          "is_relevant": false,
+          "text": "androgen. [an\u00e2\u0080\u00b2dr\u00c9\u0099jin]. Etymology: Gk, andros + genein, to produce. any steroid hormone that increases male characteristics. Natural hormones, such as testosterone and its esters and analogs, are primarily used as substitution therapy. androgenic, adj."
+        },
+        {
+          "rank": 4,
+          "doc_id": "364139",
+          "is_relevant": false,
+          "text": "In general, androgens promote protein synthesis and growth of those tissues with androgen receptors. Testosterone effects can be classified as virilizing and anabolic, though the distinction is somewhat artificial, as many of the effects can be considered both."
+        },
+        {
+          "rank": 5,
+          "doc_id": "1001875",
+          "is_relevant": false,
+          "text": "Androgens are a group of chemically related sex steroid hormones. Steroids are a special kind of fat molecule with a four-ringed, carbon atom backbone or core, like their cholesterol predecessor. CAPTION: A series of chemical changes turns cholesterol into androgen hormones.he weaker androgens androstenedione and dehydroepiandrosterone (DHEA) occur in small amounts in all vertebrates. Although 11-ketotestosterone is a weak androgen in four-legged vertebrates, it is the most potent variety in bony fishes and sharks."
+        }
+      ]
+    },
+    {
+      "query_id": "52",
+      "query_text": " pneumo is a prefix meaning air. Knowing this, explain why this condition is called pneumothorax",
+      "relevant_doc_ids": [
+        "7466019"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7466019",
+          "is_relevant": true,
+          "text": "A pneumothorax (pneumo- + thorax; plural pneumothoraces) is an abnormal collection of air or gas in the pleural space that causes an uncoupling of the lung from the chest wall.Like pleural effusion (liquid buildup in that space), pneumothorax may interfere with normal breathing.n a minority of cases, the amount of air in the chest increases markedly when a one-way valve is formed by an area of damaged tissue, leading to a tension pneumothorax."
+        },
+        {
+          "rank": 2,
+          "doc_id": "2679711",
+          "is_relevant": false,
+          "text": "A pneumothorax is an abnormal collection of air in the pleural space that causes an uncoupling of the lung from the chest wall. Like a pleural effusion (liquid buildup in that space), a pneumothorax may interfere with normal breathing. Symptoms typically include chest pain and shortness of breath."
+        },
+        {
+          "rank": 3,
+          "doc_id": "1962410",
+          "is_relevant": false,
+          "text": "the combining form pneum/o means. lung. the total volume of air that can be exhaled after a maximum inspiration is called. vital capacity. Advertisement ) the medical term apnea means. lack of breathing. the medical term dyspnea means. painful breathing. the diagnostic term for narrowing of the trachea is."
+        },
+        {
+          "rank": 4,
+          "doc_id": "1868136",
+          "is_relevant": false,
+          "text": "A pneumothorax occurs when some of the tiny air sacs (alveoli) in a baby's lung become overinflated and burst. This causes air to leak into the space between the lung and chest wall (pleural space). The most common cause of pneumothorax is respiratory distress syndrome. This is a condition that occurs in babies who are born too early (premature). The baby's lungs lack the slippery substance (surfactant) that helps them stay open. Therefore, the tiny air sacs are not able to expand as easily."
+        },
+        {
+          "rank": 5,
+          "doc_id": "2540415",
+          "is_relevant": false,
+          "text": "Search. A spontaneous pneumothorax is the sudden onset of a collapsed lung without any apparent cause, such as a traumatic injury to the chest or a known lung disease."
+        }
+      ]
+    },
+    {
+      "query_id": "58",
+      "query_text": " the knee is what type of joint ",
+      "relevant_doc_ids": [
+        "7571934"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "2889278",
+          "is_relevant": false,
+          "text": "The knee, also known as the tibiofemoral joint, is a synovial hinge joint formed between three bones: the femur, tibia, and patella. Two rounded, convex processes (known as condyles) on the distal end of the femur meet two rounded, concave condyles at the proximal end of the tibia...."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7571934",
+          "is_relevant": true,
+          "text": "The knee joint is a hinge type synovial joint, which mainly allows for flexion and extension (and a small degree of medial and lateral rotation).he shape of the knee joint means that it is relatively weak, and so it relies on muscles and ligaments to ensure stability. \u00c2\u00a9 2015 TeachMeAnatomy.com [CC-BY-NC-ND 4.0]. Fig 1.0 \u00e2\u0080\u0093 A broad overview of the bony structures of the knee joint."
+        },
+        {
+          "rank": 3,
+          "doc_id": "885450",
+          "is_relevant": false,
+          "text": "Also found in: Dictionary, Thesaurus, Idioms, Encyclopedia, Wikipedia. knee. the area around the knee joint, a hinge joint that is one of the largest joints of the body, sustaining great pressure. The knee is formed by the proximal portion of the tibia, the distal end of the femur, and the patella, or kneecap."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7838006",
+          "is_relevant": false,
+          "text": "Picture of the Knee. \u00c2\u00a9 2014 WebMD, LLC. All rights reserved. The knee is one of the largest and most complex joints in the body. The knee joins the thigh bone (femur) to the shin bone (tibia). The smaller bone that runs alongside the tibia (fibula) and the kneecap (patella) are the other bones that make the knee joint.Tendons connect the knee bones to the leg muscles that move the knee joint.he knee joins the thigh bone (femur) to the shin bone (tibia). The smaller bone that runs alongside the tibia (fibula) and the kneecap (patella) are the other bones that make the knee joint. Tendons connect the knee bones to the leg muscles that move the knee joint."
+        },
+        {
+          "rank": 5,
+          "doc_id": "1692656",
+          "is_relevant": false,
+          "text": "Synovial joints, sometimes called diarthrosis, are the most movable type of joint in the body. Joints are formed where bones come together. In this lesson, we'll explore the six types of synovial joints and discuss their functions.s shown on this illustration, the six types of synovial joints include the pivot, hinge, saddle, plane, condyloid, and ball-and-socket joints. These joints are found throughout the body; however some locations serve as better examples than others. To begin our investigation, let's focus on the pivot joints."
+        }
+      ]
+    },
+    {
+      "query_id": "184",
+      "query_text": "+is biology a social science",
+      "relevant_doc_ids": [
+        "765726"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "3559057",
+          "is_relevant": false,
+          "text": "A group of academic disciplines that examine society and how people interact and develop as a culture. Social science as a field of study is separate from the natural sciences, which cover topics such as physics and chemistry. Economics, political science, history, law and geography can be considered social sciences."
+        },
+        {
+          "rank": 2,
+          "doc_id": "8830508",
+          "is_relevant": false,
+          "text": "Social science is a major category of academic disciplines, concerned with society and the relationships among individuals within a society.ost universities offer degrees in social science fields. The Bachelor of Social Science is a degree targeted at the social sciences in particular. It is often more flexible and in-depth than other degrees that include social science subjects."
+        },
+        {
+          "rank": 3,
+          "doc_id": "8745767",
+          "is_relevant": false,
+          "text": "Explain why economics is considered a social science. Economics is a social science because it deals with the behavior of people as they cope with the fundamental scarcity."
+        },
+        {
+          "rank": 4,
+          "doc_id": "335181",
+          "is_relevant": false,
+          "text": "Sociology is the scientific study of society, including patterns of social relationships, social interaction, and culture. It is a social science that uses various methods of empirical investigation and critical analysis to develop a body of knowledge about social order, acceptance, and change. Many sociologists aim to conduct research that may be applied directly to social policy and welfare, while others focus primarily on refining the theoretical understanding of social processes. Subject mat"
+        },
+        {
+          "rank": 5,
+          "doc_id": "3416093",
+          "is_relevant": false,
+          "text": "Social science research is conducted using the scientific method: ask a question, form a hypothesis, conduct empirical research, draw a conclusion, and evaluate the conclusion. Fields of study in which social science research is used include political science, anthropology, and sociology. Learning Outcomes. Look over the lesson on social science research in great detail so that you can be certain of your ability to: Realize the importance of social science research ; Outline the steps of the scientific method"
+        }
+      ]
+    },
+    {
+      "query_id": "222",
+      "query_text": "+what does ca cells mean urine test",
+      "relevant_doc_ids": [
+        "7681245"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7681245",
+          "is_relevant": true,
+          "text": "A urine calcium test is done to measure how much calcium is passed out of the body through urine. The test is also known as the urinary Ca+2 test. Calcium is the most common mineral in the body. All cells throughout the body use calcium for various functions. Calcium is used by the body to build and repair bones and teeth. It also helps nerves, the heart, and muscles function properly, and blood to clot."
+        },
+        {
+          "rank": 2,
+          "doc_id": "5923185",
+          "is_relevant": false,
+          "text": "The microscopic urinalysis is the study of the urine sample under a microscope. It requires only a relatively inexpensive light microscope. Cells and cellular debris, bacteria, and crystals in the urine can be detected by this examination to provide further clinical clues."
+        },
+        {
+          "rank": 3,
+          "doc_id": "5389065",
+          "is_relevant": false,
+          "text": "The Test Sample. A urinalysis is a group of physical, chemical, and microscopic tests. The tests detect and/or measure several substances in the urine, such as byproducts of normal and abnormal metabolism, cells, cellular fragments, and bacteria."
+        },
+        {
+          "rank": 4,
+          "doc_id": "8625009",
+          "is_relevant": false,
+          "text": "Urinalysis (Definition) It is a routine test on urine which tests for concentration of urine with specific gravity, screening for glucose, protein, blood, nitrites which is a screening test for infection.And microscopic exam for white blood cells and red blood cells."
+        },
+        {
+          "rank": 5,
+          "doc_id": "7323864",
+          "is_relevant": false,
+          "text": "Cells (e.g., red blood cells, white blood cells) Cells in urine start to break down, and then they will not be visible under the microscope. Since the presence of these cells often signifies infection or inflammation, an erroneous diagnosis could be made."
+        }
+      ]
+    },
+    {
+      "query_id": "254",
+      "query_text": "+what is cchaps",
+      "relevant_doc_ids": [
+        "7373204"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "6385121",
+          "is_relevant": false,
+          "text": "CG-CAHPS \u00e2\u0080\u0093 When will the surveys be required? The Clinician and Group CAHPS (CGCAHPS) is a standardized tool that was created to provide a standardized measurement of patients\u00e2\u0080\u0099 experience of a physician and office staff. There have been a lot of speculations about the CGCAHPS mandate and uncertainty about it\u00e2\u0080\u0099s implementation."
+        },
+        {
+          "rank": 2,
+          "doc_id": "264507",
+          "is_relevant": false,
+          "text": "What it is. Hospital Consumer Assessment of Healthcare Providers and Systems (HCAHPS), also known as the CAHPS Hospital survey or Hospital CAHPS, is a formal public reporting initiative asks your patients to rate their experiences regarding their inpatient stay."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7276898",
+          "is_relevant": false,
+          "text": "Healthcare Common Procedure Coding System. The Healthcare Common Procedure Coding System (HCPCS, often pronounced by its acronym as hick picks) is a set of health care procedure codes based on the American Medical Association's Current Procedural Terminology (CPT)."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7331133",
+          "is_relevant": false,
+          "text": "HCAHPS Overview. The HCAHPS (Hospital Consumer Assessment of Healthcare Providers and Systems) survey is the first national, standardized, publicly reported survey of patients' perspectives of hospital care."
+        },
+        {
+          "rank": 5,
+          "doc_id": "926791",
+          "is_relevant": false,
+          "text": "No. CCOHS does not offer EAP services. See question below about how to find an EAP service provider. EAPs are usually a program purchased or funded by your employer and provided by an external organization or occasionally by a department within your company."
+        }
+      ]
+    },
+    {
+      "query_id": "255",
+      "query_text": "+what is centure",
+      "relevant_doc_ids": [
+        "7629892"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "1926368",
+          "is_relevant": false,
+          "text": "A centaur (/\u00cb\u0088s\u00c9\u009bnt\u00c9\u0094\u00cb\u0090r/; Greek: \u00ce\u00ba\u00ce\u00ad\u00ce\u00bd\u00cf\u0084\u00ce\u00b1\u00cf\u0085\u00cf\u0081\u00ce\u00bf\u00cf\u0082, K\u00c3\u00a9ntauros, Latin: centaurus), or occasionally hippocentaur, is a mythological creature with the upper body of a human and the lower body of a horse."
+        },
+        {
+          "rank": 2,
+          "doc_id": "2697909",
+          "is_relevant": false,
+          "text": "A centimetre (American spelling centimeter, symbol cm) is a unit of length that is equal to one hundreth of a metre, the current SI base unit of length. A centimetre is part of a metric system. It is the base unit in the centimetre-gram-second system of units."
+        },
+        {
+          "rank": 3,
+          "doc_id": "623390",
+          "is_relevant": false,
+          "text": "\u00e2\u0080\u00ba\u00e2\u0080\u00ba Definition: Centilitre. A centilitre (cL or cl) a metric unit of volume that is equal to one hundredth of a litre and is equal to a little more than six tenths (0.6102) of acubic inch, or one third (0.338) of a fluid ounce.ou can use this form to select from known units: Convert centilitres to. I'm feeling lucky, show me some random units. A centilitre (cL or cl) a metric unit of volume that is equal to one hundredth of a litre and is equal to a little more than six tenths (0.6102) of acubic inch, or one third (0.338) of a fluid ounce."
+        },
+        {
+          "rank": 4,
+          "doc_id": "54991",
+          "is_relevant": false,
+          "text": "For other uses, see Centaurus (disambiguation). Centaurus /s\u00c9\u009bn\u00cb\u0088t\u00c9\u0094\u00cb\u0090r\u00c9\u0099s/ is a bright constellation in the southern sky. One of the largest constellations, Centaurus was included among the 48 constellations listed by the 2nd century astronomer Ptolemy, and it remains one of the 88 modern constellations."
+        },
+        {
+          "rank": 5,
+          "doc_id": "1992697",
+          "is_relevant": false,
+          "text": "Centricity EMR is a patient centered electronic medical record (EMR) system designed for use in clinical and ambulatory care practices (1). Centricity EMR allows clinicians to electronically document patient encounters, enter patient data into research databases, and ensure the secure exchange of clinical knowledge (1). Centricity Practice Solution designed for a practices of all sizes with a fully integrated Electronic Medical Record (EMR). 2  Centricity EMR designed to interface with practice management systems in larger physician practices.)."
+        }
+      ]
+    },
+    {
+      "query_id": "321",
+      "query_text": "+where is your siatic nerve located",
+      "relevant_doc_ids": [
+        "2225701"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "6304560",
+          "is_relevant": false,
+          "text": "The pudendal nerve is found in the pelvis. It is the biggest division of the pudendal plexus (a network of nerves) and is located behind the sacrospinous ligament, near the tailbone. The nerve extends from the sacral plexus, through the pudendal canal, the perineum, and the gluteal area."
+        },
+        {
+          "rank": 2,
+          "doc_id": "4280293",
+          "is_relevant": false,
+          "text": "The pudendal nerve is found in the pelvis. It is the biggest division of the pudendal plexus (a network of nerves) and is located behind the sacrospinous ligament, near the tailbone.The nerve extends from the sacral plexus, through the pudendal canal, the perineum, and the gluteal area.These are structures located near the genital, rectal, and gluteal (buttock) regions.The condition known as pudendal neuralgia can cause both bladder and anal incontinence.he nerve extends from the sacral plexus, through the pudendal canal, the perineum, and the gluteal area. These are structures located near the genital, rectal, and gluteal (buttock) regions. The condition known as pudendal neuralgia can cause both bladder and anal incontinence."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7791719",
+          "is_relevant": false,
+          "text": "Where is sciatic nerve pain felt? Sciatic nerve pain can be felt anywhere along the path of the sciatic nerve, which spans from the lower spine through the hips, buttocks, legs and feet. Because this important nerve transmits motor and sensory signals throughout the lower body, interference with the sciatic nerve can be debilitating."
+        },
+        {
+          "rank": 4,
+          "doc_id": "4280297",
+          "is_relevant": false,
+          "text": "Your pudendal nerve runs from your lower back, along your pelvic floor muscles, out to your perineum (the skin between your pubic bone and your tailbone). It supplies the skin between the anus and the clitoris (or a man\u00e2\u0080\u0099s penis) as well as the muscles of the urethra and the anus (see light green area below).udendal neuralgia is pain related to the pudendal nerve, which is the main nerve running between your pubic bone and your tailbone."
+        },
+        {
+          "rank": 5,
+          "doc_id": "3519933",
+          "is_relevant": false,
+          "text": "Your pudendal nerve runs from your lower back, along your pelvic floor muscles, out to your perineum (the skin between your pubic bone and your tailbone). It supplies the skin between the anus and the clitoris (or a man\u00e2\u0080\u0099s penis) as well as the muscles of the urethra and the anus (see light green area below)."
+        }
+      ]
+    },
+    {
+      "query_id": "361",
+      "query_text": ". irritability medical definition",
+      "relevant_doc_ids": [
+        "7390980"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7390980",
+          "is_relevant": true,
+          "text": "1. irritability-an irritable petulant feeling. choler, crossness, fretfulness, fussiness, peevishness, petulance. ill humor, ill humour, distemper-an angry and disagreeable mood. testiness, tetchiness, touchiness-feeling easily irritated."
+        },
+        {
+          "rank": 2,
+          "doc_id": "1885790",
+          "is_relevant": false,
+          "text": ": characterized by irritability: asa: easily exasperated or excitedb: responsive to stimuli. Thesaurus: All synonyms and antonyms for irritable Spanish Central: Translation of irritable Nglish: Translation of irritable for Spanish speakers Britannica English: Translation of irritable for Arabic speakers."
+        },
+        {
+          "rank": 3,
+          "doc_id": "377313",
+          "is_relevant": false,
+          "text": "reactivity. 1  sensitivity, sensitiveness, sensibility - (physiology) responsiveness to external stimuli; the faculty of sensation; sensitivity to pain. 2  excitability, irritability - excessive sensitivity of an organ or body part."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7088605",
+          "is_relevant": false,
+          "text": "a condition of general bodily weakness or discomfort, often marking the onset of a disease. 2. a vague or unfocused feeling of mental uneasiness, lethargy, or discomfort."
+        },
+        {
+          "rank": 5,
+          "doc_id": "1614862",
+          "is_relevant": false,
+          "text": "verb (used with object) 1. to distress with mental or bodily pain; trouble greatly or grievously: to be afflicted with arthritis. 2. Obsolete. to overthrow; defeat. to humble."
+        }
+      ]
+    },
+    {
+      "query_id": "362",
+      "query_text": ". what are the president's main duties? explain each",
+      "relevant_doc_ids": [
+        "2371093",
+        "393407",
+        "646001"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "3278712",
+          "is_relevant": false,
+          "text": "The President\u00e2\u0080\u0099s many duties include: selecting a Majority Leader, appointing Senators to standing Senate committees, appointing committee chairs, and appointing citizens to a variety of boards and commissions. 1  Initiatives. 2  Legislative Appointments. 3  Media."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7211302",
+          "is_relevant": false,
+          "text": "Responsibilities of a President. 1  Creating, communicating and implementing the organization's vision, mission, and overall direction. 2  Leading, guiding, directing, and evaluating the work of other executive leaders including senior vice presidents, vice presidents, and directors, usually depending on the size of the organization.\u00e2\u0080\u008b."
+        },
+        {
+          "rank": 3,
+          "doc_id": "3424982",
+          "is_relevant": false,
+          "text": "Identify and describe the various roles of the president of the United States. Understand how the president communicates with the public. Recognize ways that young citizens can actively participate in a democracy. Express their views in a letter to the president."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7942316",
+          "is_relevant": false,
+          "text": "Though specific duties of the position vary in senate chambers across the country, the president of the senate may assume any or all of the following duties: 1  Calls the chamber to order. 2  Presides over the Senate sessions and joint sessions of the House and Senate. 3  Ensures that members abide by the chamber's rules. 4  Oversees the legislative process."
+        },
+        {
+          "rank": 5,
+          "doc_id": "3977479",
+          "is_relevant": false,
+          "text": "As chief diplomat, the president acts as leader, initiator and the guide of U.S. foreign policy. Sometimes, the president passes the chief diplomat role and responsibilities to various delegates in the state department.owers and Functions. The Constitution gives the president the powers to recognize foreign governments and make bilateral or multilateral treaties. He usually must get advice and consent of the Senate, but in some cases he makes agreements with other countries without congressional approval."
+        }
+      ]
+    },
+    {
+      "query_id": "370",
+      "query_text": ". what is the institute for leaders?",
+      "relevant_doc_ids": [
+        "7897935"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7897935",
+          "is_relevant": true,
+          "text": "The Leadership Institute is a membership organization established in 1992 which provides a unique opportunity for senior leadership teams from advanced care delivery systems to focus on new issues and problems collectively rather than in isolation."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7166128",
+          "is_relevant": false,
+          "text": "An institute is  an organisational body created for a certain purpose. Often they are research organisations (research institutions) created to do research on specific topics. An institute can also be a professional body, or one involved in adult education, see Mechanics' Institutes. In some countries institutes can be part of a university or other institutions of higher education, either as a group of departments or an autonomous educational institution without a traditional university status such as a university Institute."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7371738",
+          "is_relevant": false,
+          "text": "Definition of Institute of Medicine. Institute of Medicine: A nonprofit organization established in 1970 as a component of the US National Academy of Sciences that works outside the framework of government to provide evidence-based research and recommendations for public health and science policy. Abbreviated IOM. The IOM is also an honorific membership organization."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7674405",
+          "is_relevant": false,
+          "text": "Definition of institute for Students. 1  1 : an organization for the promotion of a cause an institute for scientific research. 2  2 : a place for study usually in a special field an art institute."
+        },
+        {
+          "rank": 5,
+          "doc_id": "4704300",
+          "is_relevant": false,
+          "text": "Studies in Poverty and Inequality Institute (SPII) is an independent, not-for-profit based in Johannesburg, South Africa, established in 2006. SPII is rooted in the values of the South African constitution."
+        }
+      ]
+    },
+    {
+      "query_id": "409",
+      "query_text": ".vbs what it mean",
+      "relevant_doc_ids": [
+        "7991069"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7991069",
+          "is_relevant": true,
+          "text": "VBS is an acronym for verbal bitch slap. It is most commonly used as a verb. To tell off an individual using a professional tone, correct grammar and big words. Also inflicting some kind of emotional pain that is surprising to the individual getting VBSed. Basically laying it down in a way that cannot provoke a hostile response, yet puts the individual into their place in an eloquent fashion."
+        },
+        {
+          "rank": 2,
+          "doc_id": "6020577",
+          "is_relevant": false,
+          "text": "(\u00cb\u0088s\u00c3\u00a6t\u00c9\u00aas\u00cb\u008cfa\u00c9\u00aas) vb. 1. (intr) to act in such a way as to satisfy the minimum requirements for achieving a particular result. 2. (tr) obsolete to satisfy. [C16: altered from satisfy]"
+        },
+        {
+          "rank": 3,
+          "doc_id": "1369316",
+          "is_relevant": false,
+          "text": "VBScript (Microsoft Visual Basic Scripting Edition) is an Active Scripting language developed by Microsoft that is modeled on Visual Basic. It allows Microsoft Windows system administrators to generate powerful tools for managing computers with error handling, subroutines, and other advanced programming constructs."
+        },
+        {
+          "rank": 4,
+          "doc_id": "283254",
+          "is_relevant": false,
+          "text": "(r\u00c9\u00aa\u00cb\u0088tr\u00c3\u00a6kt) vb. 1. (tr) to draw in (a part or appendage): a snail can retract its horns; to retract the landing gear of an aircraft. 2. to withdraw (a statement, opinion, charge, etc) as invalid or unjustified. 3. to go back on (a promise or agreement) 4. (intr) to shrink back, as in fear."
+        },
+        {
+          "rank": 5,
+          "doc_id": "3888186",
+          "is_relevant": false,
+          "text": "Visual Basic (VB) is a programming language. Visual Studio is an Integrated Development Environment (IDE) that supports software development in many programming languages, including VB."
+        }
+      ]
+    },
+    {
+      "query_id": "484",
+      "query_text": "1 mile equals how many feet",
+      "relevant_doc_ids": [
+        "7784059",
+        "7784066"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "4999106",
+          "is_relevant": false,
+          "text": "To find out how many feet in miles, multiply the mile value by the conversion factor or use the converter. 1 Mile = 5280 Feet 1 Mile [US, Nautical] = 6076.1 Feet 1 Mile [UK, Nautical] = 6080 Feet There are 5280 feet in a mile, because one mile is defined as 8 furlongs and 1 furlong is 660 feet, that makes 8 * 660 ft = 5280 feet in a mile."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7447816",
+          "is_relevant": false,
+          "text": "Inches and miles are both units of length used in the United States. Before you can convert one mile to inches, it's helpful to know that there are 5,280 feet in one mile. Answer and Explanation: There are 63,360 inches in one mile. To get this answer, you need to multiply 12 (the number of inches in one foot) x 5,280 (the number of feet in one mile). 12 x 5,280 equals 63,360. So, there are 63,360 inches in one mile."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7784066",
+          "is_relevant": true,
+          "text": "1 = 1 mile/5280 feet is also true. (the ratio 1 mile/5280 feet equals 1 was arrived at by dividing each side of the original conversion equation by 5280 feet). Also since 1 mile = 1.609 kilometers."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7380208",
+          "is_relevant": false,
+          "text": "Mile and foot (for both imperial and nautical) conversion factors are listed below. To find out how many feet in miles or vice versa, please either use these conversion factors by multplying them to get the result or simply use the converters below. 1 Mile = 5280 Feet."
+        },
+        {
+          "rank": 5,
+          "doc_id": "5581668",
+          "is_relevant": false,
+          "text": "The following is a list of definitions relating to conversions between feet and miles. A foot is a unit of length in both US Customary Units as well as the Imperial System. The symbol for foot is ft or '. There are 5,280 feet in a mile. A mile is a unit of length in both US Customary Units as well as the Imperial System. The symbol for mile is mi. There are 0.00018939 miles in a foot."
+        }
+      ]
+    },
+    {
+      "query_id": "509",
+      "query_text": "1 us dollar equals how many euros",
+      "relevant_doc_ids": [
+        "7685086"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7685086",
+          "is_relevant": true,
+          "text": "In order to find out how much two euros is in US dollars, divide 1 (one, as in one dollar) by 0.825835 to calculate how many US dollars one euro is worth in France: $1.21. 1  1.00 United States dollars = 0.825835 euros. 2  1 euro = 1.21090 USD."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7685088",
+          "is_relevant": false,
+          "text": "In order to find out how much two euros is in US dollars, divide 1 (one, as in one dollar) by 0.825835 to calculate how many US dollars one euro is worth in France: $1.21. 1  1.00 United States dollars = 0.825835 euros."
+        },
+        {
+          "rank": 3,
+          "doc_id": "1429710",
+          "is_relevant": false,
+          "text": "The symbol for EUR can be written &euro;. The symbol for USD can be written $. The Euro is divided into 100 cents. The United States Dollar is divided into 100 cents. The exchange rate for the Euro was last updated on September 1, 2017 from The International Monetary Fund."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7560515",
+          "is_relevant": false,
+          "text": "Currently, 1 US dollar is equal to 0.572436 pounds ... or in reverse, 1 pound is equal to 1.74690 dollars. If you were to get dealer rates: 0.572 British pounds is one US dollar This changes every second If you buy or sell over the counter then expect to get less buck for your pound or less pound for your dollar. 4 english muffins and a spot of tea."
+        },
+        {
+          "rank": 5,
+          "doc_id": "7525338",
+          "is_relevant": false,
+          "text": "\u00c2\u00a31 = $1.61 1.5444 American dollars equal one pound. More As the above answers show, exchange rates change regularly so any specific answer posted here becomes out of date almost immediately. While it's not normal WikiAnswers policy to say use the Internet, that's the best approach in this case."
+        }
+      ]
+    },
+    {
+      "query_id": "514",
+      "query_text": "1. define lymph and explain its function",
+      "relevant_doc_ids": [
+        "4465617",
+        "7721856"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "5790776",
+          "is_relevant": false,
+          "text": "Lymph Node Function. Lymph nodes serve two major functions in the body. They filter lymph and assist the immune system in building an immune response. Lymph is a clear fluid that comes from blood plasma that exits blood vessels at capillary beds.This fluid becomes the interstitial fluid that surrounds cells.ymphoma is the term used for cancer that begins in the lymphatic system. This type of cancer originates in the lymphocytes that inhabit lymph nodes and lymph tissues. Lymphomas are grouped into two main types: Hodgkin's lymphoma and Non-Hodgkin lymphoma (NHL) ."
+        },
+        {
+          "rank": 2,
+          "doc_id": "6266123",
+          "is_relevant": false,
+          "text": "Making the world better, one answer at a time. The main function of lymph nodes is to act as a drainage system by absorbing and expelling proteins, dead cells, bacteria and other waste products from the body.Basically they clean and filter the lymph before it is returned to the blood.nswered by The Community. Making the world better, one answer at a time. The main function of lymph nodes is to act as a drainage system by absorbing and expelling proteins, dead cells, bacteria and other waste products from the body. Basically they clean and filter the lymph before it is returned to the blood."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7761401",
+          "is_relevant": false,
+          "text": "lymph - Student Encyclopedia (Ages 11 and up) In humans and many other animals, lymph is pale fluid that bathes body tissues, removes bacteria, and returns proteins and fluids to the blood. Important components of lymph are the white blood cells known as lymphocytes and macrophages."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7721856",
+          "is_relevant": true,
+          "text": "From Wikipedia, the free encyclopedia. Lymph is the fluid that circulates throughout the lymphatic system. The lymph is formed when the interstitial fluid (the fluid which lies in the interstices of all body tissues) is collected through lymph capillaries.rom Wikipedia, the free encyclopedia. Lymph is the fluid that circulates throughout the lymphatic system. The lymph is formed when the interstitial fluid (the fluid which lies in the interstices of all body tissues) is collected through lymph capillaries."
+        },
+        {
+          "rank": 5,
+          "doc_id": "6629094",
+          "is_relevant": false,
+          "text": "The second function of the lymphatic system is the absorption of fats and fat-soluble vitamins from the digestive system, followed by transport of these fats to your blood circulation. The third function, and the most well-known function of the lymphatic system, is defense against disease."
+        }
+      ]
+    },
+    {
+      "query_id": "579",
+      "query_text": "100g chicken carb content",
+      "relevant_doc_ids": [
+        "7362513"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7362513",
+          "is_relevant": true,
+          "text": "The lowest amount of Carbs is in Chicken, broilers or fryers, meat only, cooked, fried which in 100g contains 1.69 g of Carbs. The median value of Carbs is found in which in 100g contains 0 g of Carbs.The average amount of Carbs contained in 100g of chicken, based on the list below is 7.97 g of Carbs.he lowest amount of Carbs is in Chicken, broilers or fryers, meat only, cooked, fried which in 100g contains 1.69 g of Carbs. The median value of Carbs is found in which in 100g contains 0 g of Carbs."
+        },
+        {
+          "rank": 2,
+          "doc_id": "6904331",
+          "is_relevant": false,
+          "text": "Welcome to the nutritional zinc content in 100 different types of chicken, ranging from 7.3 mg to 1.76 mg per 100g. The basic type of chicken is Chicken, canned, no broth which in 100g contains 2.5 mg of zinc. The total recommended daily allowance or RDA for zinc is 15 mg."
+        },
+        {
+          "rank": 3,
+          "doc_id": "8522993",
+          "is_relevant": false,
+          "text": "The average (or more correctly the arithmetic mean) amount of potassium contained in 100g of chicken breast, based on the list below of 35 different items under the general description of chicken breast, is 273.77 mg of potassium."
+        },
+        {
+          "rank": 4,
+          "doc_id": "6364059",
+          "is_relevant": false,
+          "text": "Boneless Skinless (Chicken Breast). Serving Size: 4 ounces (cooked), Calories: 110, Fat: 2.5g, Carbs: 0g, Protein: 23g. Fillet Only (No Skin or Bone) (Chicken Breast). Serving Size: 100 g, Calories: 164, Fat: 3.5g, Carbs: 0g, Protein: 30g."
+        },
+        {
+          "rank": 5,
+          "doc_id": "6552438",
+          "is_relevant": false,
+          "text": "Schnucks Chicken 10 Chicken salad. Per 1 cup - Cal: 350 kcal | Fat: 30 g | Carbs: 2 g | Protein: 25 g. Rotisserie chicken breast skin removed. Per 1 oz - Cal: 30 kcal | Fat: 1 g | Carbs: 1 g | Protein: 5 g. Chicken wing drummettes. Per 4 oz - Cal: 200 kcal | Fat: 15 g | Carbs: 0 g | Protein: 18 g."
+        }
+      ]
+    },
+    {
+      "query_id": "697",
+      "query_text": "15 oz can in ml",
+      "relevant_doc_ids": [
+        "7318446"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7318446",
+          "is_relevant": true,
+          "text": "15 Milliliters (mL). =. 0.50721 Ounces (fl oz). Milliliters. A milliliter (also written milliliter; SI symbol ml) is a non-SI metric system unit of volume which is commonly used as liquid unit. It is equal to 1/1000 liter, or one cubic centimeter, therefore, 1ml =1/1000 L =1 CM3.Ounces. A fluid ounce (abbreviated fl oz, fl. oz. or oz. fl.) is a unit of volume. It is equal to about 28.41 ml in the imperial system or about 29.57 ml in the US system.The fluid ounce is sometimes referred to simply as an ounce in applications where its use is implicit.unces. A fluid ounce (abbreviated fl oz, fl. oz. or oz. fl.) is a unit of volume. It is equal to about 28.41 ml in the imperial system or about 29.57 ml in the US system."
+        },
+        {
+          "rank": 2,
+          "doc_id": "527545",
+          "is_relevant": false,
+          "text": "Amount: 1 fluid ounce US (fl oz) in volume. Equals: 29.57 milliliters (ml) volume and capacity from fluid ounce US to milliliter Conversion Results: Enter a New fluid ounce US Amount of volume and capacity to Convert From. * Whole numbers, decimals or fractions (ie: 6, 5.33, 17 3/8) * Precision is how many numbers after decimal point (1 - 9)"
+        },
+        {
+          "rank": 3,
+          "doc_id": "7852258",
+          "is_relevant": false,
+          "text": "This calculator-converter provides conversion of milliliters to US customary fluid ounces (ml to fl oz) and backwards fluid ounce to millilitres (fl oz to ml). 1 ml (milliliter) = 1/1000 L (Liter, the official SI unit of volume) = 0.0338140227018 fl oz (US fluid ounce)."
+        },
+        {
+          "rank": 4,
+          "doc_id": "5546415",
+          "is_relevant": false,
+          "text": "There is an approximate calculation of 16 ounces when converting 500 milliliters. Each milliliter is 0.033814 ounces, and to perform this conversion, one would have to multiply 0.033814 by 500 to get the exact answer. The exact calculation is 16.907 fluid ounces."
+        },
+        {
+          "rank": 5,
+          "doc_id": "6466192",
+          "is_relevant": false,
+          "text": "For cooking unit conversions, please go to Cooking Conversion. Fluid ounces to milliliters (fluid oz to ml) conversion factors for US and UK are listed below. To find out how many milliliters in ounces, multiply by the factors or simply use the converter below. 1 Fluid Ounce [US] = 29.5735296 Milliliters."
+        }
+      ]
+    },
+    {
+      "query_id": "846",
+      "query_text": "2 liters is how many ounces",
+      "relevant_doc_ids": [
+        "7339498"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "5569958",
+          "is_relevant": false,
+          "text": "There are 0.029573529564112 liter in a ounce. 1 Ounce is equal to 0.029573529564112 Liter. 1 fl oz = 0.029573529564112 L. Known as the US fluid ounce, the unit of volume for liquid substances is used as ounce in the US and other countries practicing the US Customary system. It is equals to approximately 1/8 of US cup, 1/16 of US pint, approximately 1.040842731 Imperial Fluid Ounces, 2 tablespoons or 6 teaspoons."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7934234",
+          "is_relevant": false,
+          "text": "Liters to fluid ounces volume units conversion factors are listed below. To find out how many ounces in liters, multiply by the right factor or instead, use the converter below if converting into US fluid ounces. 1 Liter = 33.8140226 Ounces [Fluid, US] 1 Liter = 35.195 079 Ounces [UK] For fluid oz to liter converter, please go to fluid oz to liter."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7868473",
+          "is_relevant": false,
+          "text": "How can you find out how many ounces there are in a liter and a half? Answer and Explanation: 1 liter contains 33.814 fluid ounces. To find out how many ounces are in half a liter, divide that number by 2. That will give you 16.907 fluid ounces. For the final step, you need to add the two numbers together: 33.814 fluid ounces plus 16.907 fluid ounces equals 50.721 fluid ounces. So, there are 50.721 fluid ounces, or roughly 51 fluid ounces, in a liter and a half."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7339498",
+          "is_relevant": true,
+          "text": "67.62 oz. 33.8140226 US fluid ounces ==. So 67.628 oz. = 2 liters. 67.62 oz. 33.8140226 US fluid ounces ==. So 67.628 oz."
+        },
+        {
+          "rank": 5,
+          "doc_id": "7451575",
+          "is_relevant": false,
+          "text": "Best Answer: If you look on a (ONE LITER) bottle of soda, it will tel you that 1 liter = 33.81 fluid ounces. A quart is 32 fluid ounces, so a liter is a little bit more than a quart, and four liters is a little bit more than a gallon. The person who said 67+ ounces in a liter must have been looking at a TWO LITER bottle of soda."
+        }
+      ]
+    },
+    {
+      "query_id": "943",
+      "query_text": "2007 va disability compensation rates",
+      "relevant_doc_ids": [
+        "7389241"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7389241",
+          "is_relevant": true,
+          "text": "2009 VA Disability Compensation Rates The following tables show the 2009 VA compensation rates for veterans with a disability rating 10 percent or higher.o find the amount payable to a 70% disabled veteran with a spouse and four children, one of whom is over 18 and attending school, take the 70% rate for a veteran with a spouse and 3 children, $ 1,513, and add the rate for one school child, $168. The total amount payable is $1,681."
+        },
+        {
+          "rank": 2,
+          "doc_id": "1105173",
+          "is_relevant": false,
+          "text": "Review of State Variances in VA Disability Compensation Payments. \u00e2\u0080\u00a2 A 100 percent rating is only 10 percent higher than a 90 percent rating, but the 100. percent payment rate is 70 percent higher than the 90 percent rate of $1,380. Figure 1. Relationship between Degrees of Disability and Compensation Payment Rates."
+        },
+        {
+          "rank": 3,
+          "doc_id": "4077196",
+          "is_relevant": false,
+          "text": "LIST OF FIGURES 1. Overview of the VA Disability Compensation Process.............................................. 2 2. State Average Compensation in FY 2005................................................................... 5 3."
+        },
+        {
+          "rank": 4,
+          "doc_id": "284503",
+          "is_relevant": false,
+          "text": "I am a Vietnam, combat-wounded veteran who is permanently and totally disabled. I am trying to determine how much of my VA benefits my wife of 41 years will receive after I die. I have a disability rating from VA of 80 percent. However, I am paid at the 100 percent rate due to Individual Unemployability (IU)."
+        },
+        {
+          "rank": 5,
+          "doc_id": "98145",
+          "is_relevant": false,
+          "text": "VA Disability Compensation: More than sixty days of post-conviction incarceration for a felony reduces a veteran's VA Disability Compensation entitlement for the remainder of the period of incarceration. 38 U.S.C. \u00c2\u00a7 5313(a)(1); 38 C.F.R. \u00c2\u00a7 3.665."
+        }
+      ]
+    },
+    {
+      "query_id": "1007",
+      "query_text": "2015 college half term holiday dates",
+      "relevant_doc_ids": [
+        "7330517"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7330517",
+          "is_relevant": true,
+          "text": "Holiday Dates for college students*: 1  Autumn Half Term: 26 October 2015 to 30 October 2015 (teaching re-starts from 3/4 November 2015 due to staff P&D days \u00e2\u0080\u0093 check with your tutor). 2  Winter Break: 18 December 2015 to 5 January 2016 (teaching re-starts from 5/6 January 2016 due to staff P&D days \u00e2\u0080\u0093 check with your tutor)."
+        },
+        {
+          "rank": 2,
+          "doc_id": "8253918",
+          "is_relevant": false,
+          "text": "TERM DATES. Term dates for 2015 are as follows: Term 1: 2 February - 27 March Term 2: 13 April - 26 June Term 3: 13 July - 18 September Term 4: 5 October - 18 December."
+        },
+        {
+          "rank": 3,
+          "doc_id": "5686996",
+          "is_relevant": false,
+          "text": "Summer Term: 20 April-28 August 2015, with main student activity 11 May-26 June 2015. 1  Holidays: 20 April-8 May. 2  Assessment period: 11 May-5 June OR Teaching (and related assessments)/ Placement activity: 11 May-12 June. 3  Summer Term activity: 8-26 June (up to 3 July for some placement activity).ummer Term: 20 April-28 August 2015, with main student activity 11 May-26 June 2015. 1  Holidays: 20 April-8 May. 2  Assessment period: 11 May-5 June OR Teaching (and related assessments)/ Placement activity: 11 May-12 June. 3  Summer Term activity: 8-26 June (up to 3 July for some placement activity)."
+        },
+        {
+          "rank": 4,
+          "doc_id": "4405985",
+          "is_relevant": false,
+          "text": "OCTOBER 2015 S M T W STh F S 1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 APRIL 2016 M T W Th F23 4 5 6 7 8 910 11 12 13 14 1517 18 19 20 21 22 23 24 25 26 27 28 29 30 1 Spring Break."
+        },
+        {
+          "rank": 5,
+          "doc_id": "3640417",
+          "is_relevant": false,
+          "text": "S M T W T F S NOV 11 (Tuesday) Veterans Day Holiday (No School) S M T W T F S. 1 2 26-28 (Wed-Fri) Thanksgiving Holiday (No School) 1 2 3 4 5 6 7. 3 4 5 6 7 8 9 DEC 19 (Friday) End 1st Semester (46) (89 )Half Day Students 8 9 10 11 12 13 14."
+        }
+      ]
+    }
+  ]
+}

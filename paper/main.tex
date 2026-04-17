@@ -11,6 +11,9 @@
 \usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[section]{placeins}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{hyperref}
@@ -24,12 +27,14 @@
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \setlist[itemize]{leftmargin=1.5em}
 \newcommand{\bgebase}{\textsc{BGE-Base}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \title{On Query-Side Compression for Online-Efficient Dense Retrieval:\\Failure Modes, Pooling Effects, and ANN Tradeoffs}
 \author{Angad Singh Ahuja}
 \date{\today}
 
 \begin{document}
+\raggedbottom
 \maketitle
 
 \input{sections/abstract}

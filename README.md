@@ -1,125 +1,187 @@
 # FastQueryDR
 
-Initial scaffold for studying online-efficient dense retrieval via asymmetric query encoders.
+FastQueryDR is an experimental repository for studying online-efficient dense retrieval through asymmetric query compression.
 
-## Current Teacher Reference
+The project focuses on a simple but important systems question: if document encoding is amortized offline and only query encoding is on the online critical path, how much retrieval quality survives when we compress only the query encoder and leave the document encoder strong?
 
-- Frozen teacher reference: zero-shot `BAAI/bge-base-en-v1.5`
-- Reference benchmark on the prepared MS MARCO slice:
+## Project Goal
+
+The repository studies dense retrieval under an explicitly asymmetric deployment model:
+
+- document embeddings are computed offline and indexed once
+- query embeddings are computed online at request time
+- query latency therefore matters more than document-side cost
+- student compression is applied only to the query tower
+
+The core research question is:
+
+> Can shallow query-side compression produce meaningful latency gains without destroying dense retrieval quality?
+
+## What The Study Actually Tested
+
+The experimental progression in this repository is:
+
+1. Establish a strong teacher reference with frozen zero-shot `BAAI/bge-base-en-v1.5`
+2. Validate the training, retrieval, and latency pipeline on an MS MARCO-derived benchmark slice
+3. Build asymmetric shallow students with 4-layer and 2-layer query encoders while keeping the document tower full-depth and frozen
+4. Add one intervention at a time on the student side:
+   - query-side mean pooling
+   - query-only projection head
+   - lightweight teacher-student distillation
+5. Compare exact FAISS retrieval against ANN search on the strongest shallow student
+6. Package the results into final tables, figures, and a paper draft
+
+This is not a leaderboard-oriented repository. It is designed to isolate failure modes and first-order tradeoffs.
+
+## Final Study Status
+
+- Teacher reference: frozen zero-shot `BAAI/bge-base-en-v1.5`
+- Teacher benchmark on the prepared MS MARCO slice:
   `MRR@10 = 0.7670`, `Recall@100 = 0.9882`
-- Fine-tuning is optional and currently treated as an ablation path, not the default teacher definition
+- Best shallow student: 4-layer asymmetric query encoder with query-side mean pooling
+  `MRR@10 = 0.0479`, `Recall@100 = 0.2492`
+- ANN result: `IVF` is the only approximate index that provides a plausible speed-quality tradeoff on the best student
 
-## Asymmetric Students
+## Main Findings
 
-- Phase 4 starts from the frozen zero-shot BGE teacher as the reference model.
-- Student experiments truncate only the query encoder and keep the document encoder full-depth and frozen.
-- First student configs:
+The repository now supports a clear empirical story:
+
+- Zero-shot BGE is the strongest teacher under the current setup.
+- Naive 4-layer and 2-layer query truncation causes catastrophic retrieval collapse.
+- Query-side mean pooling is the first clear positive intervention for the shallow 4-layer student.
+- The tested projection head hurts retrieval quality.
+- The tested lightweight distillation objective is near-neutral.
+- On the systems side, `IVF` is the only ANN variant worth discussing as a practical compromise; `HNSW` is faster but too lossy.
+
+## Final Deliverables
+
+- Paper source: [paper/main.tex](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/paper/main.tex)
+- Paper PDF: [paper/main.pdf](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/paper/main.pdf)
+- Paper archive: [FastQueryDR_paper.zip](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/FastQueryDR_paper.zip)
+- Main results: [results/main_table.csv](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/results/main_table.csv)
+- Latency results: [results/latency_table.csv](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/results/latency_table.csv)
+- ANN results: [results/ann_table.csv](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/results/ann_table.csv)
+
+## Key Configs
+
+Teacher-side:
+
+- Zero-shot teacher reference:
+  [configs/teacher_bge_zero_shot_reference.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/teacher_bge_zero_shot_reference.yaml)
+- Conservative teacher fine-tune ablation:
+  [configs/teacher_msmarco_finetune_conservative.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/teacher_msmarco_finetune_conservative.yaml)
+
+Student-side:
+
+- Raw 4-layer student:
   [configs/student_query4_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_msmarco.yaml)
+- Raw 2-layer student:
   [configs/student_query2_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query2_msmarco.yaml)
-
-## Phase 5 Direction
-
-- Official BGE usage is `cls` pooling, so the passage tower and frozen teacher should stay on `cls`.
-- The first Phase 5 ablation is therefore query-side pooling only, not a global pooling change.
-- The first implemented config is [configs/student_query4_pool_mean_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_msmarco.yaml), which keeps passage pooling on `cls` and switches only the 4-layer query tower to `mean`.
-- The next implemented ablation is a query-only projection head on top of that improved pooled student:
+- Best student:
+  [configs/student_query4_pool_mean_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_msmarco.yaml)
+- Projection-head ablation:
   [configs/student_query4_pool_mean_proj256_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_proj256_msmarco.yaml)
-- Harder negatives and distillation remain later training-family interventions.
-
-## Phase 6 Direction
-
-- The first distillation variant is intentionally lightweight.
-- It keeps the current best student architecture fixed and adds only a teacher-student KL term on the in-batch similarity matrix.
-- Teacher: frozen zero-shot BGE with `cls` pooling on both sides.
-- Config:
+- Distillation ablation:
   [configs/student_query4_pool_mean_distill_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_distill_msmarco.yaml)
 
-## Phase 1 Decisions
-
-- Teacher encoder: `BAAI/bge-base-en-v1.5`
-- Initial dataset slice: first `100,000` MS MARCO training triples, with `5,000` held out for validation
-- First objective: symmetric bi-encoder training with pure query-positive in-batch contrastive loss
-- Query encoding uses the standard BGE retrieval instruction prefix: `Represent this sentence for searching relevant passages: `
-- BGE configs use `CLS` pooling and a conservative `1e-5` learning rate to avoid degrading pretrained retrieval behavior during fine-tuning
-- The strongest teacher baseline in this repo is the frozen zero-shot BGE checkpoint, not a fine-tuned checkpoint
-
-## Project Layout
+## Repository Layout
 
 ```text
 .
-├── configs/
-├── data/
-├── documentation/
-├── figures/
-├── notes/
-├── results/
-├── scripts/
-├── src/
+├── configs/         Experiment configurations
+├── data/            Local dataset directory (ignored)
+├── documentation/   Original proposal and implementation-plan docs
+├── paper/           Final paper source, figures, tables, and PDF
+├── results/         Final CSV summaries
+├── scripts/         Training and evaluation entrypoints
+├── src/             Core library code
 └── pyproject.toml
 ```
 
-## Expected Data Format
+## Data Format
 
-Place a tab-separated file at `data/msmarco/train_triples.tsv` with one triple per line:
-
-```text
-query<TAB>positive_passage<TAB>negative_passage
-```
-
-The training script will take the configured slice from this file and split off a validation set.
-
-For retrieval evaluation, add:
+Expected MS MARCO-style files:
 
 ```text
+data/msmarco/train_triples.tsv
 data/msmarco/corpus.tsv
 data/msmarco/dev_queries.tsv
 data/msmarco/dev_qrels.tsv
 ```
 
-Expected formats:
+Formats:
 
 ```text
-corpus.tsv:      passage_id<TAB>passage_text
-dev_queries.tsv: query_id<TAB>query_text
-dev_qrels.tsv:   query_id<TAB>passage_id
+train_triples.tsv: query<TAB>positive_passage<TAB>negative_passage
+corpus.tsv:        passage_id<TAB>passage_text
+dev_queries.tsv:   query_id<TAB>query_text
+dev_qrels.tsv:     query_id<TAB>passage_id
 ```
 
-`dev_qrels.tsv` also accepts TREC-style rows such as `query_id<TAB>0<TAB>passage_id<TAB>1`.
+`dev_qrels.tsv` also accepts TREC-style rows:
+`query_id<TAB>0<TAB>passage_id<TAB>1`
 
-## Quick Start
+## Minimal Setup
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .
-python scripts/train_teacher.py --config configs/teacher_msmarco_mini.yaml
-python scripts/run_retrieval_eval.py --config configs/teacher_bge_zero_shot_reference.yaml
-python scripts/run_retrieval_eval.py --config configs/teacher_msmarco_phase2.yaml --checkpoint /path/to/best_model.pt
-python scripts/run_latency_benchmark.py --config configs/teacher_msmarco_phase3.yaml --checkpoint /path/to/best_model.pt
-python scripts/export_retrieval_examples.py --config configs/teacher_bge_zero_shot_reference.yaml --output notes/zero_shot_examples_probe.json --probe-queries 20 --probe-corpus-size 5000
-python scripts/export_retrieval_examples.py --config configs/teacher_msmarco_phase3.yaml --checkpoint results/runs/<run_name>/best_model.pt --output notes/trained_examples_probe.json --probe-queries 20 --probe-corpus-size 5000
-python scripts/train_teacher.py --config configs/student_query4_msmarco.yaml
-python scripts/train_teacher.py --config configs/student_query2_msmarco.yaml
+.venv/bin/pip install -e .
 ```
 
-The first training or evaluation run will also need to download `BAAI/bge-base-en-v1.5` from Hugging Face unless that model is already cached locally.
+## Common Commands
 
-## Phase 3 Latency Protocol
+Zero-shot teacher evaluation:
 
-Latency is measured on a fixed held-out subset of dev queries with:
+```bash
+.venv/bin/python scripts/run_retrieval_eval.py --config configs/teacher_bge_zero_shot_reference.yaml
+```
 
-- batch-size-1 query encoding
-- warmup queries excluded from measurement
-- end-to-end retrieval timing against a prebuilt FAISS flat index
-- query memory footprint reported as GPU peak allocation when on CUDA, otherwise process RSS delta on CPU
+Best student training:
 
-## Conservative Fine-Tuning
+```bash
+.venv/bin/python scripts/train_teacher.py --config configs/student_query4_pool_mean_msmarco.yaml
+```
 
-Use [configs/teacher_msmarco_finetune_conservative.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/teacher_msmarco_finetune_conservative.yaml) if you still want a fine-tuned teacher ablation. It tightens the recipe by:
+Latency benchmark:
 
-- lowering the learning rate to `5e-6`
-- capping training with `max_steps`
-- selecting checkpoints by retrieval probe `MRR@10` rather than validation loss
-- enabling patience-based early stopping on a fixed probe subset of dev queries and corpus passages
+```bash
+.venv/bin/python scripts/run_latency_benchmark.py --config configs/teacher_msmarco_phase3.yaml --checkpoint /path/to/best_model.pt
+```
 
-Student configs reuse the same conservative recipe, but switch to `architecture: asymmetric`, set `query_num_hidden_layers` to `4` or `2`, and freeze the full-depth document encoder.
+ANN comparison on the best student:
+
+```bash
+.venv/bin/python scripts/run_ann_comparison.py --config configs/student_query4_pool_mean_msmarco.yaml --checkpoint /path/to/best_model.pt
+```
+
+Paper build:
+
+```bash
+cd paper
+pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
+```
+
+## Implementation Notes
+
+- Query texts use the BGE retrieval instruction prefix:
+  `Represent this sentence for searching relevant passages: `
+- The strongest teacher in this repository is the frozen zero-shot model, not a fine-tuned checkpoint.
+- The document tower stays full-depth and frozen in the asymmetric student experiments.
+- Latency measurement uses batch-size-1 query encoding and separates query encoding cost from search cost.
+- The paper is the main final artifact; the CSV files provide the compact quantitative summaries used by the paper.
+
+## Scope And Limitations
+
+This repository should be read as a controlled study, not a full production retriever:
+
+- the benchmark is an MS MARCO-derived slice, not the full passage-ranking benchmark
+- only one teacher backbone is used
+- the shallow student intervention space is intentionally small
+- the transfer evaluation is limited
+- the ANN comparison is secondary to the encoder-side compression story
+
+That narrowness is deliberate: the project is built to make the failure modes visible and reproducible.

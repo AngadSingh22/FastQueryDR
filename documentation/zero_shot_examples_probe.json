@@ -1,0 +1,797 @@
+{
+  "checkpoint": null,
+  "model_name": "BAAI/bge-base-en-v1.5",
+  "pooling": "cls",
+  "num_queries": 20,
+  "top_k": 5,
+  "probe": {
+    "query_limit": 20,
+    "corpus_size": 5000
+  },
+  "examples": [
+    {
+      "query_id": "2",
+      "query_text": " Androgen receptor define",
+      "relevant_doc_ids": [
+        "4339068"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "4339068",
+          "is_relevant": true,
+          "text": "The androgen receptor (AR), also known as NR3C4 (nuclear receptor subfamily 3, group C, member 4), is a type of nuclear receptor that is activated by binding either of the androgenic hormones, testosterone, or dihydrotestosterone in the cytoplasm and then translocating into the nucleus.n some cell types, testosterone interacts directly with androgen receptors, whereas, in others, testosterone is converted by 5-alpha-reductase to dihydrotestosterone, an even more potent agonist for androgen receptor activation."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7691806",
+          "is_relevant": false,
+          "text": "Anabolic steroids are a class of drugs with a basic steroid ring structure that produces anabolic and androgenic effects. The prototypical anabolic steroid is testosterone. Anabolic effects include promoting the growth of muscle.EA is not aware of any legitimate medical use or New Drug Applications (NDA) for the three substances that DEA is proposing to classify by this NPRM as anabolic steroids under the definition set forth under 21 U.S.C. 802 (41)(A)."
+        },
+        {
+          "rank": 3,
+          "doc_id": "1146465",
+          "is_relevant": false,
+          "text": "\u00e2\u0080\u00a2The liver also inactivates hormones and regulates the amount of testosterone and estrogen in the blood \u00e2\u0080\u00a2The liver plays a major role in break down and synthesis"
+        },
+        {
+          "rank": 4,
+          "doc_id": "2434655",
+          "is_relevant": false,
+          "text": "The definition of a gene is a unit on a chromosome that determines a specific trait in an organism, or a male's name. 1  An example of a gene is a chromosome unit that determines a person's eye color.  An example of a man named Gene is the actor Gene Wilder."
+        },
+        {
+          "rank": 5,
+          "doc_id": "456501",
+          "is_relevant": false,
+          "text": "The male reproductive system consists of a number of sex organs that play a role in the process of human reproduction. These organs are located on the outside of the body and within the pelvis."
+        }
+      ]
+    },
+    {
+      "query_id": "52",
+      "query_text": " pneumo is a prefix meaning air. Knowing this, explain why this condition is called pneumothorax",
+      "relevant_doc_ids": [
+        "7466019"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7466019",
+          "is_relevant": true,
+          "text": "A pneumothorax (pneumo- + thorax; plural pneumothoraces) is an abnormal collection of air or gas in the pleural space that causes an uncoupling of the lung from the chest wall.Like pleural effusion (liquid buildup in that space), pneumothorax may interfere with normal breathing.n a minority of cases, the amount of air in the chest increases markedly when a one-way valve is formed by an area of damaged tissue, leading to a tension pneumothorax."
+        },
+        {
+          "rank": 2,
+          "doc_id": "774779",
+          "is_relevant": false,
+          "text": "How is transpulmonary pressure equal to the elastic recoil of the lung? I don't understand what you get when you substract pleural pressure from alveolar pressure. Also while I was reseaching this pneumothorax came up. It seems that elatic recoil of the lung is pushing one way and the chest wall is pushing one way."
+        },
+        {
+          "rank": 3,
+          "doc_id": "6775287",
+          "is_relevant": false,
+          "text": "Mechanics of Ventilation. Ventilation, or breathing, is the movement of air through the conducting passages between the atmosphere and the lungs. The air moves through the passages because of pressure gradients that are produced by contraction of the diaphragm and thoracic muscles.ulmonary ventilation. Pulmonary ventilation is commonly referred to as breathing. It is the process of air flowing into the lungs during inspiration (inhalation) and out of the lungs during expiration (exhalation). Air flows because of pressure differences between the atmosphere and the gases inside the lungs."
+        },
+        {
+          "rank": 4,
+          "doc_id": "1922808",
+          "is_relevant": false,
+          "text": "Every cell in your body needs oxygen in order to live. The air we breathe contains oxygen and other gases. Once in the lungs, oxygen is moved into the bloodstream and carried through your body. At each cell in your body, oxygen is exchanged for a waste gas called carbon dioxide.Your bloodstream then carries this waste gas back to the lungs where it is removed from the blood stream and then exhaled.Your lungs and respiratory system automatically perform this vital process, called gas exchange. ALVEOLI are the very small air sacs that are the destination of breathed-in air. 2  CAPILLARIES are blood vessels in the walls of the alveoli. 3  Blood passes through the capillaries, entering through your PULMONARY ARTERY and leaving via your PULMONARY VEIN."
+        },
+        {
+          "rank": 5,
+          "doc_id": "4318502",
+          "is_relevant": false,
+          "text": "The two branches of the pulmonary artery carry blood to both lungs. In the lungs, the blood picks up oxygen and expels carbon dioxide. Reoxygenated blood (red blood) leaving the lungs enters the heart through the pulmonary veins and is carried into the left atrium."
+        }
+      ]
+    },
+    {
+      "query_id": "58",
+      "query_text": " the knee is what type of joint ",
+      "relevant_doc_ids": [
+        "7571934"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7571934",
+          "is_relevant": true,
+          "text": "The knee joint is a hinge type synovial joint, which mainly allows for flexion and extension (and a small degree of medial and lateral rotation).he shape of the knee joint means that it is relatively weak, and so it relies on muscles and ligaments to ensure stability. \u00c2\u00a9 2015 TeachMeAnatomy.com [CC-BY-NC-ND 4.0]. Fig 1.0 \u00e2\u0080\u0093 A broad overview of the bony structures of the knee joint."
+        },
+        {
+          "rank": 2,
+          "doc_id": "8838754",
+          "is_relevant": false,
+          "text": "This type of joint permits a variety of movements in different planes; rotational movement, however, is not possible. Gliding joints: The articulating surfaces are nearly flat or slightly curved. These joints allow sliding or back-and-forth motion and twisting movements.Most of the joints within the wrist and ankle, as well as those between the articular processes of adjacent vertebrae, belong to this group.his type of joint permits a variety of movements in different planes; rotational movement, however, is not possible. Gliding joints: The articulating surfaces are nearly flat or slightly curved. These joints allow sliding or back-and-forth motion and twisting movements."
+        },
+        {
+          "rank": 3,
+          "doc_id": "94758",
+          "is_relevant": false,
+          "text": "Other joints of the foot that can be affected by RA are the ankle joint and the talonavicular joint, which is part of the foot's arch. When the talonavicular joint is affected, the foot can become destabilized and flat feet (pes planus) can develop."
+        },
+        {
+          "rank": 4,
+          "doc_id": "3598623",
+          "is_relevant": false,
+          "text": "Rheumatoid arthritis is often referred to as RA. 1  The inflammation in the joints causes joint pain, stiffness, swelling, and loss of function. 2  The inflammation often affects other organs and systems of the body, including the lungs, heart, and kidneys.lthough rheumatoid arthritis most often affects the joints, it is a disease of the entire body. It can affect many organs and body systems besides the joints. Therefore, rheumatoid arthritis is referred to as a systemic disease."
+        },
+        {
+          "rank": 5,
+          "doc_id": "7708984",
+          "is_relevant": false,
+          "text": "1 844 Sprains and strains of knee and leg. 2  844.0 Sprain of lateral collateral ligament of knee convert 844.0 to ICD-10-CM. 3  844.1 Sprain of medial collateral ligament of knee convert 844.1 to ICD-10-CM.  844.2 Sprain of cruciate ligament of knee convert 844.2 to ICD-10-CM."
+        }
+      ]
+    },
+    {
+      "query_id": "184",
+      "query_text": "+is biology a social science",
+      "relevant_doc_ids": [
+        "765726"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "765726",
+          "is_relevant": true,
+          "text": "Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, and taxonomy. Modern biology is a vast and eclectic field, composed of many branches and subdisciplines."
+        },
+        {
+          "rank": 2,
+          "doc_id": "794613",
+          "is_relevant": false,
+          "text": "Share this page: Sociology is the study of human behaviors and the interaction between human groups and institutions. Sociologists take an in depth look at social inequalities (including race, gender, and class); the environment; cultural traditions; family relations; health care; globalization; politics and social movements; and crime and justice."
+        },
+        {
+          "rank": 3,
+          "doc_id": "6117552",
+          "is_relevant": false,
+          "text": "An undergraduate degree in forensic science or a natural science is required for work in crime laboratories, with extensive coursework in mathematics, chemistry, and biology. More advanced positions, such as lab managers and supervisors, might require a master\u00e2\u0080\u0099s degree."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7276126",
+          "is_relevant": false,
+          "text": "that stresses molecular and quantitative concepts. Courses in taxonomy, botany and ecology will not satisfy this requirement. \u00e2\u0080\u00a2 General/Inorganic and Organic Chemistry - Students normally meet this requirement if they\u00e2\u0080\u0099ve completed a one-year course in basic chemistry with labs and a one-year course in organic chemistry with labs."
+        },
+        {
+          "rank": 5,
+          "doc_id": "5216968",
+          "is_relevant": false,
+          "text": "The first is divided into invertebrate and vertebrate paleontology; the second includes paleoalgology (the study of fossil algae), paleopalynology (the study of pollen and spores of ancient plants), and paleocarpology (the study of seeds of ancient plants).p\u00c4\u0081'l\u00c4\u0093\u00c9\u0099nt\u00c5\u008fl`\u00c9\u0099j\u00c4\u0093) [Gr.,= study of early beings], science of the life of past geologic periods based on fossil remains. Knowledge of the existence of fossils fossil,remains or imprints of plants or animals preserved from prehistoric times by the operation of natural conditions."
+        }
+      ]
+    },
+    {
+      "query_id": "222",
+      "query_text": "+what does ca cells mean urine test",
+      "relevant_doc_ids": [
+        "7681245"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7681245",
+          "is_relevant": true,
+          "text": "A urine calcium test is done to measure how much calcium is passed out of the body through urine. The test is also known as the urinary Ca+2 test. Calcium is the most common mineral in the body. All cells throughout the body use calcium for various functions. Calcium is used by the body to build and repair bones and teeth. It also helps nerves, the heart, and muscles function properly, and blood to clot."
+        },
+        {
+          "rank": 2,
+          "doc_id": "6193716",
+          "is_relevant": false,
+          "text": "Cystoscopy of the Bladder. Cystoscopy is a test that looks at the inner lining of the bladder and the tube from the bladder to the outside of the body (urethra). The cystoscope is a thin, lighted viewing tool that is put into the urethra and moved into the bladder.When the cystoscope is inside your bladder, sterile water or saline is injected through the scope to help expand your bladder and to create a clear view.A medicine may also be injected through the scope to reduce chances of infection. A cystoscopy can check for stones, tumors, bleeding, and infection.he cystoscope is a thin, lighted viewing tool that is put into the urethra and moved into the bladder. When the cystoscope is inside your bladder, sterile water or saline is injected through the scope to help expand your bladder and to create a clear view."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7328877",
+          "is_relevant": false,
+          "text": "\u00e2\u0080\u0094 Nina, New Jersey. Dehydration in and of itself is very unlikely to cause blood in the urine (hematuria). Red blood cells can show up in the urine for a number of different reasons including infection, trauma, bladder tumors, and kidney and bladder stones, as well as other inflammatory conditions of the bladder. There are several ways to detect blood in the urine, and some can create false positives."
+        },
+        {
+          "rank": 4,
+          "doc_id": "6688956",
+          "is_relevant": false,
+          "text": "1. Protection against exposure to light, heat, and ambient moisture is mandatory to guard against altered reagent activity. 2. Clinitest is not specific for glucose and will react with sufficient quantities of any reducing substance in the urine (lactose, fructose, galactose, and pentoses).3. Failure to observe the reaction at all times can lead to erroneously low results if the \u00e2\u0080\u009cpass-through\u00e2\u0080\u009d phenomenon is missed.. Protection against exposure to light, heat, and ambient moisture is mandatory to guard against altered reagent activity. 2. Clinitest is not specific for glucose and will react with sufficient quantities of any reducing substance in the urine (lactose, fructose, galactose, and pentoses)."
+        },
+        {
+          "rank": 5,
+          "doc_id": "7853607",
+          "is_relevant": false,
+          "text": "Test Overview. A phosphate test measures the amount of phosphate in a blood sample. Phosphate is a charged particle (ion) that contains the mineral phosphorus. The body needs phosphorus to build and repair bones and teeth, help nerves function, and make muscles contract."
+        }
+      ]
+    },
+    {
+      "query_id": "254",
+      "query_text": "+what is cchaps",
+      "relevant_doc_ids": [
+        "7373204"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7373204",
+          "is_relevant": true,
+          "text": "As organizations and communities explore ways to put the Community-wide Children's Health Assessment & Planning Survey (CCHAPS) data to work, Cook Children's hopes to share its experiences with current outreach initiatives in Tarrant County with new collaborative efforts."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7356751",
+          "is_relevant": false,
+          "text": "Home Affordable Modification Program (HAMP) The largest program within MHA is the Home Affordable Modification Program (HAMP). HAMP\u00e2\u0080\u0099s goal is to offer homeowners who are at risk of foreclosure reduced monthly mortgage payments that are affordable and sustainable over the long-term. An ability to make their monthly mortgage payments after a modification."
+        },
+        {
+          "rank": 3,
+          "doc_id": "1521835",
+          "is_relevant": false,
+          "text": "HCPCS Level II includes services such as ambulance, durable medical equipment, prosthetics, orthotics and supplies (DMEPOS), when used outside a physician\u00e2\u0080\u0099s office. This coding system is also used as an official code set for outpatient hospital care, chemotherapy drugs, Medicaid, and other services."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7815073",
+          "is_relevant": false,
+          "text": "Specific drinking water tests are accredited by the Canadian Association for Laboratory Accreditation Inc. (CALA) to ISO 17025. For a list of accredited tests, refer to the laboratories scope of accreditation on IQMH Centre for Accreditation website and CALA website. IQMH maintains a list of MOHLTC-licensed laboratories. For a ccreditation information on our laboratories, visit the IQMH Centre for Accreditation website and search for PHO's legal name: Ontario Agency for Health Protection and Promotion."
+        },
+        {
+          "rank": 5,
+          "doc_id": "1063009",
+          "is_relevant": false,
+          "text": "A card security code ( CSC ; also called card verification data ( CVD ) , card verification number , card verification value ( CVV ) , card verification value code , card verification code ( CVC ) , verification code ( V-code or V code ) , card code verification , or signature panel code ( SPC ) ) is a term for a security feature for  card not ..."
+        }
+      ]
+    },
+    {
+      "query_id": "255",
+      "query_text": "+what is centure",
+      "relevant_doc_ids": [
+        "7629892"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7518381",
+          "is_relevant": false,
+          "text": "In human anatomy, the clavicle or collarbone is a long bone that serves as a strut between the shoulder blade and the sternum or breastbone. There are two clavicles, one on the left and one on the right. The clavicle is the only long bone in the body that lies horizontally. Together with the shoulder blade it makes up the shoulder girdle. It is a palpable bone and in people who have less fat in this region, the location of the bone is clearly visible, as it creates a bulge in the skin."
+        },
+        {
+          "rank": 2,
+          "doc_id": "2049816",
+          "is_relevant": false,
+          "text": "Common Era or Current Era (CE) is a year-numbering system (calendar era) for the Julian and Gregorian calendars that refers to the years since the start of this era, i.e., since AD 1. The preceding era is referred to as before the Common or Current Era (BCE). The Current Era notation system can be used as a secular alternative to the Dionysian era system, which distinguishes eras as AD (anno Domini, [the] year of [the] Lord) and BC (before Christ)."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7251162",
+          "is_relevant": false,
+          "text": "Dressler syndrome is a type of pericarditis, which is the inflammation of the sac around the heart (pericardium). It\u00e2\u0080\u0099s also called post-pericardiotomy syndrome, post-myocardial infarction syndrome, or post-cardiac injury syndrome. This is because the condition typically occurs after a heart surgery, myocardial infarction (heart attack), or injury. Dressler syndrome is thought to occur when the immune system responds excessively following one of these events. If left untreated, inflammation of the pericardium can lead to scarring, thickening, and muscle tightening of the heart, which can be life-threatening. Treatment for Dressler syndrome includes taking high doses of aspirin or other anti-inflammatory medications."
+        },
+        {
+          "rank": 4,
+          "doc_id": "6319597",
+          "is_relevant": false,
+          "text": "A multinational staffing strategy whereby each satellite office is managed as a unique national entity. Managers and employees are hired locally to minimize communication and cultural challenges. http://www.businessdictionary.com/definition/polycentric-staffing.html."
+        },
+        {
+          "rank": 5,
+          "doc_id": "1243788",
+          "is_relevant": false,
+          "text": "The unit is exactly equal to kilogram force per square centimetre (kgf/cm\u00c2\u00b2 or kg/cm\u00c2\u00b2). A kilopond is a force equal to the weight of 1 kg being pulled by an acceleration of 9.80665 m/s\u00c2\u00b2 (standard gravity). A square centimetre represents the area over which the force is distributed."
+        }
+      ]
+    },
+    {
+      "query_id": "321",
+      "query_text": "+where is your siatic nerve located",
+      "relevant_doc_ids": [
+        "2225701"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "6268280",
+          "is_relevant": false,
+          "text": "The femoral nerve is located in the leg. It helps the muscles move the hip and straighten the leg. It provides feeling (sensation) to the front of the thigh and part of the lower leg."
+        },
+        {
+          "rank": 2,
+          "doc_id": "1045957",
+          "is_relevant": false,
+          "text": "Call Your Doctor About a Goiter if: You should call the doctor if you have a large goiter and experience dizziness, hoarseness, or difficulty swallowing. The goiter may be pressing on your jugular vein, windpipe, esophagus, or the nerve that runs to your larynx. The growth requires treatment and may need to be surgically removed. WebMD Medical Reference."
+        },
+        {
+          "rank": 3,
+          "doc_id": "5903541",
+          "is_relevant": false,
+          "text": "In a radiculopathy, the problem occurs at or near the root of the nerve, shortly after its exit from the spinal cord. However, the pain or other symptoms often radiate to the part of the body served by that nerve. For example, a nerve root impingement in the neck can produce pain and weakness in the forearm.adiculopathy refers to a set of conditions in which one or more nerves are affected and do not work properly (a neuropathy). The location of the injury is at the level of the nerve root (radix = root)."
+        },
+        {
+          "rank": 4,
+          "doc_id": "2225701",
+          "is_relevant": true,
+          "text": "Top 8 Natural Treatments For Sciatic Pain. The sciatic nerve is one of the largest nerves of our body. It runs all the way down from the lower spine over the buttock to both feet to provide movement, feeling, and strength in both legs. As many as 40% of all people will get sciatica at some point in their life."
+        },
+        {
+          "rank": 5,
+          "doc_id": "2555130",
+          "is_relevant": false,
+          "text": "The location of the appendix is in the lower right quadrant of your abdome n. If you place your hand on your abdomen with the tip of your little finger just touching your pelvic bone and your thumb at your navel, your appendix is right under there usually about where your middle finger lands.he location of the appendix is in the lower right quadrant of your abdome n. If you place your hand on your abdomen with the tip of your little finger just touching your pelvic bone and your thumb at your navel, your appendix is right under there usually about where your middle finger lands."
+        }
+      ]
+    },
+    {
+      "query_id": "361",
+      "query_text": ". irritability medical definition",
+      "relevant_doc_ids": [
+        "7390980"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7390980",
+          "is_relevant": true,
+          "text": "1. irritability-an irritable petulant feeling. choler, crossness, fretfulness, fussiness, peevishness, petulance. ill humor, ill humour, distemper-an angry and disagreeable mood. testiness, tetchiness, touchiness-feeling easily irritated."
+        },
+        {
+          "rank": 2,
+          "doc_id": "2554465",
+          "is_relevant": false,
+          "text": "See the entire definition of High blood pressure. Histamine: A substance that plays a major role in many allergic reactions, dilating blood ... Hives: A raised, itchy area of skin that may be a sign of an allergic reaction. It can be ... Hoarseness: Hoarseness is a term referring to abnormal voice changes."
+        },
+        {
+          "rank": 3,
+          "doc_id": "6483656",
+          "is_relevant": false,
+          "text": "Hypochondria is a constant worry over the state of your own health even when nothing is wrong. Often the person believes they have a specific illness, or notices little bodily changes and experiences severe health anxiety as a result."
+        },
+        {
+          "rank": 4,
+          "doc_id": "4557160",
+          "is_relevant": false,
+          "text": "You may have heard the terms incongruent/congruent mood or incongruent/congruent affect, but what do they mean in psychology? Incongruent means conflicting, so your symptoms are mood-incongruent if they are not consistent with your current mood or they are at odds with current circumstances. For example: 1  Laughing when your pet dies.  Believing you receive messages from God without having delusions of being a prophet or saint, etc."
+        },
+        {
+          "rank": 5,
+          "doc_id": "4964726",
+          "is_relevant": false,
+          "text": "noun. The definition of abrasive is something that is harsh or rough, often to an unpleasant degree. An example of abrasive is the attitude of your boss who is always short tempered and yelling at you."
+        }
+      ]
+    },
+    {
+      "query_id": "362",
+      "query_text": ". what are the president's main duties? explain each",
+      "relevant_doc_ids": [
+        "2371093",
+        "393407",
+        "646001"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "393407",
+          "is_relevant": true,
+          "text": "Name: Date: Chief of StateRole: The president's role as chief of state is torepresent the United States at public events.This is mainly a ceremonial role that allows thepresident to promote/convey/representAmerican values and acknowledge others whodo the same. Guiding Questions 1."
+        },
+        {
+          "rank": 2,
+          "doc_id": "646001",
+          "is_relevant": true,
+          "text": "The president also directs the foreign and domestic policy of the United States. Since the founding of the United States, the power of the president and the federal government has grown substantially."
+        },
+        {
+          "rank": 3,
+          "doc_id": "2371093",
+          "is_relevant": true,
+          "text": "The President of the United States of America (POTUS) is the elected head of state and head of government of the United States. The president leads the executive branch of the federal government and is the commander-in-chief of the United States Armed Forces."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7760786",
+          "is_relevant": false,
+          "text": "Administrative functions are among the major duties that most medical assistants perform. Medical assistants handle important clerical tasks that enable facilities to operate efficiently."
+        },
+        {
+          "rank": 5,
+          "doc_id": "2067958",
+          "is_relevant": false,
+          "text": "The speaker is the principal leader of the House or Assembly. The speaker typically will: 1  Preside over the daily sessions of the Senate. 2  Preserve order in the chamber. 3  State parliamentary motions. 4  Rule on parliamentary questions. 5  Appoint committee chairs and members."
+        }
+      ]
+    },
+    {
+      "query_id": "370",
+      "query_text": ". what is the institute for leaders?",
+      "relevant_doc_ids": [
+        "7897935"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7897935",
+          "is_relevant": true,
+          "text": "The Leadership Institute is a membership organization established in 1992 which provides a unique opportunity for senior leadership teams from advanced care delivery systems to focus on new issues and problems collectively rather than in isolation."
+        },
+        {
+          "rank": 2,
+          "doc_id": "5442256",
+          "is_relevant": false,
+          "text": "Other Employee Reviews for Filene Research Institute. Forward-thinking organization with an exciting mission to improve financial wellness for consumers by helping financial organizations offer up-to-the-minute strategies, products, and services. The Filene team is dynamic, innovative, and ambitious."
+        },
+        {
+          "rank": 3,
+          "doc_id": "2371093",
+          "is_relevant": false,
+          "text": "The President of the United States of America (POTUS) is the elected head of state and head of government of the United States. The president leads the executive branch of the federal government and is the commander-in-chief of the United States Armed Forces."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7732201",
+          "is_relevant": false,
+          "text": "Better predictor of the appearance of leadership than distinguishing effective and ineffective leaders. Trait theory: Leaders are born, not made. Behavioral theory: Leadership traits can be taught. Behavioral Theories of Leadership Theories proposing that specific behaviors differentiate leaders from nonleaders."
+        },
+        {
+          "rank": 5,
+          "doc_id": "6320040",
+          "is_relevant": false,
+          "text": "There are a variety of lead-free alloy formulations that have been developed that use silicon, bismuth, or other constituents as a primary lead replacement. For over two decades, NIBCO has led the industry in the development of lead-free alloys and commercialization of lead-free plumbing products."
+        }
+      ]
+    },
+    {
+      "query_id": "409",
+      "query_text": ".vbs what it mean",
+      "relevant_doc_ids": [
+        "7991069"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7991069",
+          "is_relevant": true,
+          "text": "VBS is an acronym for verbal bitch slap. It is most commonly used as a verb. To tell off an individual using a professional tone, correct grammar and big words. Also inflicting some kind of emotional pain that is surprising to the individual getting VBSed. Basically laying it down in a way that cannot provoke a hostile response, yet puts the individual into their place in an eloquent fashion."
+        },
+        {
+          "rank": 2,
+          "doc_id": "283254",
+          "is_relevant": false,
+          "text": "(r\u00c9\u00aa\u00cb\u0088tr\u00c3\u00a6kt) vb. 1. (tr) to draw in (a part or appendage): a snail can retract its horns; to retract the landing gear of an aircraft. 2. to withdraw (a statement, opinion, charge, etc) as invalid or unjustified. 3. to go back on (a promise or agreement) 4. (intr) to shrink back, as in fear."
+        },
+        {
+          "rank": 3,
+          "doc_id": "2121206",
+          "is_relevant": false,
+          "text": "VBA, which stands for Visual Basic for Applications, is a programming language developed by Microsoft \u00e2\u0080\u0094 you know, the company run by the richest man in the world. Excel, along with the other members of Microsoft Office 2003, includes the VBA language (at no extra charge)."
+        },
+        {
+          "rank": 4,
+          "doc_id": "1457016",
+          "is_relevant": false,
+          "text": "(\u00cb\u0088kw\u00c9\u0092nt\u00c9\u00aa\u00cb\u008cfa\u00c9\u00aa) vb (tr) , -fies, -fying or -fied. 1. to discover or express the quantity of. 2. (Logic) logic to specify the quantity of (a term) by using a quantifier, such as all, some, or no. [C19: from Medieval Latin quantific\u00c4\u0081re, from Latin quantus how much + facere to make] \u00cb\u0088quanti\u00cb\u008cfiable adj."
+        },
+        {
+          "rank": 5,
+          "doc_id": "4506992",
+          "is_relevant": false,
+          "text": "A1 Optional. A logical value that specifies what type of reference is contained in the cell ref_text. If a1 is TRUE or omitted, ref_text is interpreted as an A1-style reference. If a1 is FALSE, ref_text is interpreted as an R1C1-style reference."
+        }
+      ]
+    },
+    {
+      "query_id": "484",
+      "query_text": "1 mile equals how many feet",
+      "relevant_doc_ids": [
+        "7784059",
+        "7784066"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7784066",
+          "is_relevant": true,
+          "text": "1 = 1 mile/5280 feet is also true. (the ratio 1 mile/5280 feet equals 1 was arrived at by dividing each side of the original conversion equation by 5280 feet). Also since 1 mile = 1.609 kilometers."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7784059",
+          "is_relevant": true,
+          "text": "Likewise, a length of 3 feet is equivalent to 1 yard. One simply multiplies 1,760 by 3 to find the answer of 5,280 feet. If one needs to find miles in inches, then one can multiply 5,280 feet by 12 inches per foot to find the answer of 63,360 inches."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7299297",
+          "is_relevant": false,
+          "text": "Quick Answer. One kilometer is equal to 0.6214 miles. Multiplying the number of kilometers by 0.6214 reveals the equivalent number of miles. For example, a 5-kilometer race is equal to approximately 3.11 miles; likewise a 10-kilometer race covers 6.22 miles. Continue Reading"
+        },
+        {
+          "rank": 4,
+          "doc_id": "2302357",
+          "is_relevant": false,
+          "text": "Meter is a metric system base length unit and defined as the length of the path travelled by light in vacuum during a time interval of 1/299,792,458 of a second. It is spelled as metre in europe and also commonly mistaken for the device meter. It equals to 3.2808399 feet, 39.3700787 inches."
+        },
+        {
+          "rank": 5,
+          "doc_id": "2630264",
+          "is_relevant": false,
+          "text": "You can use the formula for the area of a square, A = s2, to find the. number of square feet in one square yard. Convert Area Measurements. Convert one square yard to square feet. A square yard is a square with a side length of one yard. You know. that one yard is equal to three feet. So, one square yard is a square."
+        }
+      ]
+    },
+    {
+      "query_id": "509",
+      "query_text": "1 us dollar equals how many euros",
+      "relevant_doc_ids": [
+        "7685086"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7685086",
+          "is_relevant": true,
+          "text": "In order to find out how much two euros is in US dollars, divide 1 (one, as in one dollar) by 0.825835 to calculate how many US dollars one euro is worth in France: $1.21. 1  1.00 United States dollars = 0.825835 euros. 2  1 euro = 1.21090 USD."
+        },
+        {
+          "rank": 2,
+          "doc_id": "50285",
+          "is_relevant": false,
+          "text": "The U.S. dollar equivalents of the estimated foreign currency collections and expenditures will be computed at the Treasury reporting rates of exchange in effect on the last day of the fiscal year just ended. All amounts are to be rounded to the nearest thousand, e.g., $2,785,621.40 will be reported as $2,786.Click here to download Adobe Acrobat Reader). This chapter covers the Department of the Treasury (Treasury) requirements relating to the accounting for and reporting of foreign currencies acquired by accountable officers without purchase for dollars."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7481044",
+          "is_relevant": false,
+          "text": "\u00c2\u00a314.8s.2d (fourteen pounds, eight shillings and twopence \u00e2\u0080\u0093 pronounced 'tuppence' /\u00cb\u0088t\u00ca\u008cp\u00c9\u0099ns/ \u00e2\u0080\u0093 in columns of figures. Commonly read fourteen pound(s) eight and two). Halfpennies and farthings (quarter of a penny) were represented by the appropriate symbol after the whole pence.s countries of the British Empire became independent, some (like the United States) abandoned the \u00c2\u00a3sd system quickly, while others retained it almost as long as the UK itself: Australia, for example, only changed to using a decimal currency on 14 February 1966."
+        },
+        {
+          "rank": 4,
+          "doc_id": "3677380",
+          "is_relevant": false,
+          "text": "How much does it cost to produce currency and coin? Each year, the Federal Reserve Board projects the likely demand for new currency, and places an order with the Department of the Treasury's Bureau of Engraving and Printing, which produces U.S. currency and charges the Board for the cost of production. Denomination."
+        },
+        {
+          "rank": 5,
+          "doc_id": "6651967",
+          "is_relevant": false,
+          "text": "On the short scale, there are 1\u00e2\u0080\u00a62 zeros in a trillion (1012). It is 1,000,000,000,000. The traditional long scale, still used in some areas (Europe, Latin America), advances number names by millions, with intermediate names for the thousands (milliard, billiard, trilliard)."
+        }
+      ]
+    },
+    {
+      "query_id": "514",
+      "query_text": "1. define lymph and explain its function",
+      "relevant_doc_ids": [
+        "4465617",
+        "7721856"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7721856",
+          "is_relevant": true,
+          "text": "From Wikipedia, the free encyclopedia. Lymph is the fluid that circulates throughout the lymphatic system. The lymph is formed when the interstitial fluid (the fluid which lies in the interstices of all body tissues) is collected through lymph capillaries.rom Wikipedia, the free encyclopedia. Lymph is the fluid that circulates throughout the lymphatic system. The lymph is formed when the interstitial fluid (the fluid which lies in the interstices of all body tissues) is collected through lymph capillaries."
+        },
+        {
+          "rank": 2,
+          "doc_id": "4465617",
+          "is_relevant": true,
+          "text": "One of the main functions of the lymph system is to provide an accessory return route to the blood for the surplus three litres. The other main function is that of defense in the immune system. Lymph is very similar to blood plasma: it contains lymphocytes and other white blood cells.It also contains waste products and debris of cells together with bacteria and protein.he lymphatic system consists of lymphatic organs, a conducting network of lymphatic vessels, and the circulating lymph. The thymus and the bone marrow constitute the primary lymphoid organs involved in the production and early clonal selection of lymphocyte tissues."
+        },
+        {
+          "rank": 3,
+          "doc_id": "1654317",
+          "is_relevant": false,
+          "text": "The immune system is a complex set of organs, cells, proteins and other substances that function to prevent infection. Primary immunodeficiency diseases are characterized by abnormalities in specific components of the immune system that lead to an increased susceptibility to infection."
+        },
+        {
+          "rank": 4,
+          "doc_id": "656184",
+          "is_relevant": false,
+          "text": "The external genital organs of the female are collectively known as the vulva (also called the pudendum). 1  Its functions are threefold: 2  To act as sensory tissue during sexual intercourse. 3  To assist in micturition, by directing the flow of urine. 4  Defend the internal female reproductive tract from infection."
+        },
+        {
+          "rank": 5,
+          "doc_id": "370323",
+          "is_relevant": false,
+          "text": "Mononuclear cells. The mononuclear phagocyte system has two specific functions: phagocytosis of foreign material and processing and presentation of antigens to T cells by antigen-presenting cells."
+        }
+      ]
+    },
+    {
+      "query_id": "579",
+      "query_text": "100g chicken carb content",
+      "relevant_doc_ids": [
+        "7362513"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7362513",
+          "is_relevant": true,
+          "text": "The lowest amount of Carbs is in Chicken, broilers or fryers, meat only, cooked, fried which in 100g contains 1.69 g of Carbs. The median value of Carbs is found in which in 100g contains 0 g of Carbs.The average amount of Carbs contained in 100g of chicken, based on the list below is 7.97 g of Carbs.he lowest amount of Carbs is in Chicken, broilers or fryers, meat only, cooked, fried which in 100g contains 1.69 g of Carbs. The median value of Carbs is found in which in 100g contains 0 g of Carbs."
+        },
+        {
+          "rank": 2,
+          "doc_id": "6310199",
+          "is_relevant": false,
+          "text": "As you continue to meet your weight-loss goals, you can slowly add a few more grams each day. Generally though, the maximum amount of carbohydrates you can have is 100 grams a day while following a low-carb diet."
+        },
+        {
+          "rank": 3,
+          "doc_id": "8295003",
+          "is_relevant": false,
+          "text": "Calories in Chicken Breast. The favorite choice for the term Chicken Breast is 1 medium Chicken Breast (Skin Not Eaten) which has about 280 calories.Calorie and nutritional information for a variety of types and serving sizes of Chicken Breast is shown below. View other nutritional values (such as Carbs or Fats) using the filter below:Calories | Total Carbs | Total Fats | Protein | Sodium | Cholesterol | Vitamins.aten by reicherts78 for Dinner | Find related foods | More from Great Value. Boneless Skinless Chicken Breast (Great Value). Eaten by Mtnmamma for Snacks/Other | Find related foods | More from Member's Mark. Canned Chicken Breast Meat (Member's Mark)."
+        },
+        {
+          "rank": 4,
+          "doc_id": "833494",
+          "is_relevant": false,
+          "text": "Less Than 10% of the Daily Value of Carbohydrates \u00e2\u0080\u0093 A medium-sized potato contains 26g of carbohydrates, only 9% of the recommended daily value. Complex carbohydrates are a great source of energy for the body. A Great Antioxidant \u00e2\u0080\u0093 Potatoes have one of the highest overall antioxidant activity among vegetables."
+        },
+        {
+          "rank": 5,
+          "doc_id": "5998040",
+          "is_relevant": false,
+          "text": "Having a trivial amount of fiber at 0 g per 100 calories, it contains the same degree as cheese pizza, grits and chocolate. Approximately 100 percent of all foods in our system have a greater ratio of fiber to calories. Similarly, this food has a inconsiderable amount of fiber compared to foods in its food group. In this case, nearly 100% of foods in this food group have a greater ratio of fiber to calories."
+        }
+      ]
+    },
+    {
+      "query_id": "697",
+      "query_text": "15 oz can in ml",
+      "relevant_doc_ids": [
+        "7318446"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7318446",
+          "is_relevant": true,
+          "text": "15 Milliliters (mL). =. 0.50721 Ounces (fl oz). Milliliters. A milliliter (also written milliliter; SI symbol ml) is a non-SI metric system unit of volume which is commonly used as liquid unit. It is equal to 1/1000 liter, or one cubic centimeter, therefore, 1ml =1/1000 L =1 CM3.Ounces. A fluid ounce (abbreviated fl oz, fl. oz. or oz. fl.) is a unit of volume. It is equal to about 28.41 ml in the imperial system or about 29.57 ml in the US system.The fluid ounce is sometimes referred to simply as an ounce in applications where its use is implicit.unces. A fluid ounce (abbreviated fl oz, fl. oz. or oz. fl.) is a unit of volume. It is equal to about 28.41 ml in the imperial system or about 29.57 ml in the US system."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7339498",
+          "is_relevant": false,
+          "text": "67.62 oz. 33.8140226 US fluid ounces ==. So 67.628 oz. = 2 liters. 67.62 oz. 33.8140226 US fluid ounces ==. So 67.628 oz."
+        },
+        {
+          "rank": 3,
+          "doc_id": "7241951",
+          "is_relevant": false,
+          "text": "Fluid ounces: American ounces (fl oz) are about 4% larger than British ones. Gallons galore: Winchester (US) vs. Imperial gallon (UK), dry gallon, etc. US bushel and Winchester units of capacity (dry = bushel, fluid = gallon). Kegs and barrels: A keg of beer is half a barrel, but not just any barrel."
+        },
+        {
+          "rank": 4,
+          "doc_id": "6514578",
+          "is_relevant": false,
+          "text": "A new compressor should have 1.5 or 2 oz in it when you buy it, and then each can of 134a you buy has 1 oz in it, two big cans are about all you need to fill your discharged system. These 4 oz of oil are all you need.Hope this helps.+ 18 others found this useful. Low Freon in Car AC Systems The level of refrigerant or Freon in a car's air conditioning system plays a crucial role in how cold the output temperature will be."
+        },
+        {
+          "rank": 5,
+          "doc_id": "2788436",
+          "is_relevant": false,
+          "text": "The answer is 1. We assume you are converting between gram [water] and milliliter. The SI derived unit for volume is the cubic meter. 1 cubic meter is equal to 1000000 grams, or 1000000 milliliters. Note that rounding errors may occur, so always check the results. Use this page to learn how to convert between grams and milliliters."
+        }
+      ]
+    },
+    {
+      "query_id": "846",
+      "query_text": "2 liters is how many ounces",
+      "relevant_doc_ids": [
+        "7339498"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7339498",
+          "is_relevant": true,
+          "text": "67.62 oz. 33.8140226 US fluid ounces ==. So 67.628 oz. = 2 liters. 67.62 oz. 33.8140226 US fluid ounces ==. So 67.628 oz."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7318446",
+          "is_relevant": false,
+          "text": "15 Milliliters (mL). =. 0.50721 Ounces (fl oz). Milliliters. A milliliter (also written milliliter; SI symbol ml) is a non-SI metric system unit of volume which is commonly used as liquid unit. It is equal to 1/1000 liter, or one cubic centimeter, therefore, 1ml =1/1000 L =1 CM3.Ounces. A fluid ounce (abbreviated fl oz, fl. oz. or oz. fl.) is a unit of volume. It is equal to about 28.41 ml in the imperial system or about 29.57 ml in the US system.The fluid ounce is sometimes referred to simply as an ounce in applications where its use is implicit.unces. A fluid ounce (abbreviated fl oz, fl. oz. or oz. fl.) is a unit of volume. It is equal to about 28.41 ml in the imperial system or about 29.57 ml in the US system."
+        },
+        {
+          "rank": 3,
+          "doc_id": "1578549",
+          "is_relevant": false,
+          "text": "A pint is 2 cups, so that is a unit of volume. Fill up a measuring cup graduated in cups and fractional cups, like the one in Garrick's answer, until you reach the 2-cup line. But do it with quartered or halved strawberries, so they fill in the space better. If your measuring cup is in ml and liters, 2 cups is almost 500 ml, or 0.5 liter. Or weigh them. A pint of strawberries is 0.75 pounds, or 12 oz (weight), or 340 grams. A pint of strawberries is roughly 3/4 lbs or 2 cups sliced 1/2 inch thick or quartered."
+        },
+        {
+          "rank": 4,
+          "doc_id": "7241951",
+          "is_relevant": false,
+          "text": "Fluid ounces: American ounces (fl oz) are about 4% larger than British ones. Gallons galore: Winchester (US) vs. Imperial gallon (UK), dry gallon, etc. US bushel and Winchester units of capacity (dry = bushel, fluid = gallon). Kegs and barrels: A keg of beer is half a barrel, but not just any barrel."
+        },
+        {
+          "rank": 5,
+          "doc_id": "7424672",
+          "is_relevant": false,
+          "text": "The answer is 32. Since: 1 gallon= 4 quarts 1 quart= 2 pints 1 pint= 2 cups That would mean that: 2 gallons= 8 quarts 8 quarts= 16 pints 16 pints= 32 cups Hope this helps. ANSWER: 32 cups 2 cups per pint 2 pints per quart 4 quarts per gallon so 2 gallons is 8 quarts which is 16 pints which is 32 cups Or you might just know there are 16 cups in a gallon, so two gallons is 32 cups. Here is why: 2 cups in a pint, 2 pints in quart, 4 quarts in a gallon, so we have... 2x2x4=16 cups in a gallon. I hope this help too."
+        }
+      ]
+    },
+    {
+      "query_id": "943",
+      "query_text": "2007 va disability compensation rates",
+      "relevant_doc_ids": [
+        "7389241"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7389241",
+          "is_relevant": true,
+          "text": "2009 VA Disability Compensation Rates The following tables show the 2009 VA compensation rates for veterans with a disability rating 10 percent or higher.o find the amount payable to a 70% disabled veteran with a spouse and four children, one of whom is over 18 and attending school, take the 70% rate for a veteran with a spouse and 3 children, $ 1,513, and add the rate for one school child, $168. The total amount payable is $1,681."
+        },
+        {
+          "rank": 2,
+          "doc_id": "8031059",
+          "is_relevant": false,
+          "text": "(1) Where a veteran receiving compensation or pension dies after December 31, 1996, the surviving spouse, if not entitled to death compensation, dependency and indemnity compensation, or death pension for the month of death, shall be entitled to a benefit for that month in an amount equal to the amount of compensation or pension the veteran would have received for that month but for his or her death. (2) A payment issued to a deceased veteran as compensation or pension for the month in which ..."
+        },
+        {
+          "rank": 3,
+          "doc_id": "6907279",
+          "is_relevant": false,
+          "text": "Premium Rates Effective: September 1, 2014 \u00e2\u0080\u0093 August 31, 2015. Sam Houston State University adapted this information from the Employees Retirement System of. Texas (ERS). Every effort has been made to ensure the accuracy of the contents of this document. However, in the event of any discrepancy between this document and the contracts, statues and. administrative rules governing the programs administered by the Employees Retirement System of."
+        },
+        {
+          "rank": 4,
+          "doc_id": "685250",
+          "is_relevant": false,
+          "text": "AmeriCorps VISTA Members Earning Poverty-Level Allowances Told To Work Through Shutdown Without Pay. Tiffany Dale receives a $10,800-per-year allowance at her AmeriCorps job. She was told last week that, despite the government shutdown, she would have to continue working without pay for her nonprofit, which is also on a shoestring budget."
+        },
+        {
+          "rank": 5,
+          "doc_id": "5716165",
+          "is_relevant": false,
+          "text": "NOTE: Standard deduction allowance is 15% of Maryland adjusted gross income with a minimum. of $1,500 and a maximum of $2,000. d.Enter $1,000 for additional exemptions for taxpayer and/or spouse at least 65 years of age and/or blind. e."
+        }
+      ]
+    },
+    {
+      "query_id": "1007",
+      "query_text": "2015 college half term holiday dates",
+      "relevant_doc_ids": [
+        "7330517"
+      ],
+      "top_docs": [
+        {
+          "rank": 1,
+          "doc_id": "7330517",
+          "is_relevant": true,
+          "text": "Holiday Dates for college students*: 1  Autumn Half Term: 26 October 2015 to 30 October 2015 (teaching re-starts from 3/4 November 2015 due to staff P&D days \u00e2\u0080\u0093 check with your tutor). 2  Winter Break: 18 December 2015 to 5 January 2016 (teaching re-starts from 5/6 January 2016 due to staff P&D days \u00e2\u0080\u0093 check with your tutor)."
+        },
+        {
+          "rank": 2,
+          "doc_id": "7514176",
+          "is_relevant": false,
+          "text": "A full-time degree-seeking graduate student must be enrolled in at least 9 credit hours during the fall and spring semesters (6 credit hours during the summer term). A half-time graduate student must be enrolled in at least 5 credit hours during the fall and spring semesters (3 credit hours during the summer term). As stipulated below, graduate students may petition to take fewer credit hours and maintain full-time graduate student status."
+        },
+        {
+          "rank": 3,
+          "doc_id": "6762439",
+          "is_relevant": false,
+          "text": "1 For claims with a date of service on or after October 1, 2015, use an equivalent ICD-10-CM code (or codes). 2  You are viewing the 2012 version of ICD-9-CM 339.44. 3  More recent version(s) of ICD-9-CM 339.44: 2013 2014 2015."
+        },
+        {
+          "rank": 4,
+          "doc_id": "2171376",
+          "is_relevant": false,
+          "text": "ADC Inmate Visitation Policy. Kaibab. General population medium/close custody schedule is: 8: 00 a.m. - 4:00 p.m. on Saturday, Sunday and holidays, i.e., New Years, Mother's Day, Father's Day, Independence Day, Labor Day, Veterans Day, Valentines Day."
+        },
+        {
+          "rank": 5,
+          "doc_id": "3710923",
+          "is_relevant": false,
+          "text": "@BonniesWBB Opens 2015-16 With First Practice October 4, 2015 The St. Bonaventure University women\u00e2\u0080\u0099s basketball team moved a step closer to the 2015-16 basketball season on Sunday morning with the first official practice of the year at the Reilly Center."
+        }
+      ]
+    }
+  ]
+}

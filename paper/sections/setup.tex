@@ -9,3 +9,10 @@ Training uses AdamW with batch size $16$, weight decay $0.01$, warmup ratio $0.1
 Retrieval evaluation is performed on the full prepared corpus and development query set with exact inner-product FAISS search for the main tables. We report $\mathrm{MRR}@10$ and $\mathrm{Recall}@100$ together with corpus encoding time, index build time, query encoding latency, search latency, and end-to-end online latency. Latency is measured with batch size $1$ after a short warmup, using p50 and p95 over a fixed 100-query sample. Query-side memory is reported from the measured latency runs. The quantitative evidence is summarized with one retrieval table, one latency table, one ANN comparison table, and one latency--quality figure.
 
 For robustness, we also ran a BEIR transfer check on SciFact using the strongest shallow student. That transfer result is reported as an auxiliary sanity check rather than a primary target. The ANN extension compares exact FAISS against HNSW and IVF on the strongest shallow student, using the same corpus/query slice and the same retrieval metrics so that speed and quality are directly comparable.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/experiment_ladder.png}
+\caption{Study sequence and empirical progression: a strong frozen teacher, naive shallow students, low-cost student-side ablations, and a final ANN systems extension.}
+\label{fig:ladder}
+\end{figure}

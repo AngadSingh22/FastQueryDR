@@ -1,21 +1,21 @@
-\begin{table}[t]
+\begin{table}[H]
 \centering
-\small
+\footnotesize
+\renewcommand{\arraystretch}{1.05}
 \caption{Online behavior on the prepared benchmark. Query latency changes substantially across query encoders, but end-to-end latency remains dominated by exact corpus search. Peak memory is the measured query-side peak allocation during the latency evaluation, reported in MiB for readability.}
 \label{tab:latency-results}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{llrrrrr}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}lrrrr@{}}
 \toprule
-Model & Family & Query p50 (ms) & Query p95 (ms) & End-to-end p50 (ms) & End-to-end p95 (ms) & Peak memory (MiB) \\
+Model & q p50 & q p95 & e2e p50 & e2e p95 \\
 \midrule
-Teacher Zero-Shot & teacher & 3.089 & 3.199 & 23.567 & 23.821 & 429.25 \\
-Teacher Fine-Tune & teacher ablation & 3.075 & 3.213 & 23.837 & 24.243 & 1690.83 \\
-Student Q4 CLS & student & 7.171 & 8.206 & 31.239 & 32.680 & 0.06 \\
-Student Q2 CLS & student & 4.107 & 4.478 & 24.800 & 25.405 & 0.06 \\
-Student Q4 Mean & best student & 1.819 & 1.991 & 25.243 & 26.183 & 1662.73 \\
-Student Q4 Mean + Proj & student ablation & 1.848 & 1.957 & 24.822 & 25.105 & 1669.84 \\
-Student Q4 Mean + Distill & student ablation & 1.824 & 1.999 & 23.172 & 23.902 & 2079.23 \\
+Teacher Zero-Shot & 3.089 & 3.199 & 23.567 & 23.821 \\
+Teacher Fine-Tune & 3.075 & 3.213 & 23.837 & 24.243 \\
+Student Q4 CLS & 7.171 & 8.206 & 31.239 & 32.680 \\
+Student Q2 CLS & 4.107 & 4.478 & 24.800 & 25.405 \\
+Student Q4 Mean & 1.819 & 1.991 & 25.243 & 26.183 \\
+Student Q4 Mean + Proj & 1.848 & 1.957 & 24.822 & 25.105 \\
+Student Q4 Mean + Distill & 1.824 & 1.999 & 23.172 & 23.902 \\
 \bottomrule
 \end{tabular}
-\par}
 \end{table}
