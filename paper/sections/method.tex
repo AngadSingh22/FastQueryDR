@@ -8,7 +8,7 @@ with attention mask $m(x)$, where $r \in \{q,d\}$ indexes the query or document 
 
 \begin{figure}[t]
 \centering
-\resizebox{\columnwidth}{!}{\input{figures/asymmetric_architecture}}
+\includegraphics[width=\columnwidth]{figures/asymmetric_architecture.png}
 \caption{Asymmetric dense retrieval setup used throughout the student experiments. The query tower is truncated to depth $L_q$, while the document tower remains full-depth and frozen. Similarity is computed by scaled inner product over normalized embeddings.}
 \label{fig:architecture}
 \end{figure}

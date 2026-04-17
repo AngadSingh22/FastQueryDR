@@ -5,8 +5,9 @@ import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import pandas as pd
 from matplotlib.lines import Line2D
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes, mark_inset
+from matplotlib.patches import ConnectionPatch, Rectangle
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -174,151 +175,236 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
 
     by_label = {row["label"]: row for row in rows}
 
-    fig, ax = plt.subplots(figsize=(10.2, 6.4), dpi=220)
-    fig.patch.set_facecolor("white")
-    ax.set_facecolor("#fcfcfc")
-    ax.grid(True, which="major", color="#d8dde6", linewidth=0.9, alpha=0.75)
-    ax.grid(True, which="minor", color="#eceff4", linewidth=0.6, alpha=0.8)
-    ax.minorticks_on()
-
-    # Subtle teacher-quality reference band.
-    teacher_ref = by_label["Teacher Zero-Shot"]["mrr_at_10"]
-    ax.axhspan(teacher_ref - 0.015, teacher_ref + 0.015, color="#eef4fb", zorder=0)
-    ax.text(
-        5.7,
-        teacher_ref + 0.006,
-        "teacher region",
-        ha="left",
-        va="bottom",
-        fontsize=10,
-        color="#4a6d92",
+    fig, (ax_global, ax_zoom) = plt.subplots(
+        1,
+        2,
+        figsize=(11.3, 5.2),
+        dpi=260,
+        gridspec_kw={"width_ratios": [1.05, 0.95]},
+        constrained_layout=True,
     )
+    fig.patch.set_facecolor("white")
 
-    # Scatter all points on the main axes.
+    for ax in (ax_global, ax_zoom):
+        ax.set_facecolor("#fcfcfc")
+        ax.grid(True, which="major", color="#d8dde6", linewidth=0.9, alpha=0.75)
+        ax.grid(True, which="minor", color="#eceff4", linewidth=0.6, alpha=0.75)
+        ax.minorticks_on()
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+
+    teacher_ref = by_label["Teacher Zero-Shot"]["mrr_at_10"]
+    ax_global.axhspan(teacher_ref - 0.015, teacher_ref + 0.015, color="#eef4fb", zorder=0)
+    ax_global.text(1.62, teacher_ref + 0.007, "teacher-quality band", fontsize=9.2, color="#4a6d92", ha="left")
+
     for row in rows:
         style = family_styles[row["family"]]
-        ax.scatter(
+        ax_global.scatter(
             row["query_p50_ms"],
             row["mrr_at_10"],
             s=style["size"],
             c=style["color"],
             marker=style["marker"],
             edgecolors=style["edge"],
-            linewidths=1.6,
-            alpha=0.96,
+            linewidths=1.5,
+            alpha=0.97,
             zorder=3,
         )
 
-    # Main-axis labels emphasize the global story without overcrowding the student cluster.
     for label, (dx, dy) in main_label_offsets.items():
         row = by_label[label]
-        ax.annotate(
+        ax_global.annotate(
             row["label"],
             (row["query_p50_ms"], row["mrr_at_10"]),
             textcoords="offset points",
             xytext=(dx, dy),
             fontsize=10,
             color="#1f2933",
-            weight="semibold" if row["family"] in {"teacher", "student_best"} else "normal",
+            weight="semibold",
             zorder=4,
         )
 
-    ax.set_xlim(1.45, 7.45)
-    ax.set_ylim(-0.01, 0.81)
-    ax.set_xlabel("Query Encoding Latency p50 (ms)", fontsize=13)
-    ax.set_ylabel("MRR@10", fontsize=13)
-    ax.set_title("Latency--Quality Tradeoff Under Asymmetric Query Compression", fontsize=16, pad=14, weight="semibold")
+    # Show the best student in the global panel without cluttering the lower cluster.
+    best = by_label["Student Q4 Mean"]
+    ax_global.scatter(
+        best["query_p50_ms"],
+        best["mrr_at_10"],
+        s=230,
+        facecolors="none",
+        edgecolors="#14532d",
+        linewidths=2.1,
+        zorder=4,
+    )
+    ax_global.annotate(
+        "best shallow student",
+        xy=(best["query_p50_ms"], best["mrr_at_10"]),
+        xytext=(2.45, 0.18),
+        fontsize=10,
+        color="#14532d",
+        ha="center",
+        arrowprops={
+            "arrowstyle": "-|>",
+            "linewidth": 1.5,
+            "color": "#2e8b57",
+            "shrinkA": 4,
+            "shrinkB": 6,
+            "connectionstyle": "arc3,rad=-0.18",
+        },
+        bbox={"boxstyle": "round,pad=0.28", "facecolor": "#eef8f1", "edgecolor": "#2e8b57", "linewidth": 0.9},
+        zorder=5,
+    )
 
-    # Inset to resolve the low-MRR student cluster cleanly.
-    inset = inset_axes(ax, width="39%", height="43%", loc="lower left", borderpad=1.8)
-    inset.set_facecolor("#fffdf8")
-    inset.grid(True, which="major", color="#e3e7ee", linewidth=0.7, alpha=0.8)
-    for row in rows:
+    zoom_rect = Rectangle(
+        (1.55, -0.002),
+        7.35 - 1.55,
+        0.06 - (-0.002),
+        linewidth=1.2,
+        edgecolor="#b8c2cc",
+        facecolor="#f7f9fb",
+        alpha=0.5,
+        zorder=1,
+    )
+    ax_global.add_patch(zoom_rect)
+
+    ax_global.set_xlim(1.45, 7.45)
+    ax_global.set_ylim(-0.01, 0.81)
+    ax_global.set_xlabel("Query encoding latency p50 (ms)", fontsize=12)
+    ax_global.set_ylabel("MRR@10", fontsize=13)
+    ax_global.text(
+        0.02,
+        1.02,
+        "(a) Global view",
+        transform=ax_global.transAxes,
+        fontsize=12,
+        fontweight="semibold",
+        ha="left",
+        va="bottom",
+    )
+
+    # Student regime panel.
+    student_labels = [
+        "Student Q4 CLS",
+        "Student Q2 CLS",
+        "Student Q4 Mean",
+        "Student Q4 Mean + Proj",
+        "Student Q4 Mean + Distill",
+    ]
+    for label in student_labels:
+        row = by_label[label]
         style = family_styles[row["family"]]
-        inset.scatter(
+        ax_zoom.scatter(
             row["query_p50_ms"],
             row["mrr_at_10"],
-            s=max(style["size"] * 0.5, 60),
+            s=max(style["size"] * 0.8, 100),
             c=style["color"],
             marker=style["marker"],
             edgecolors=style["edge"],
-            linewidths=1.0,
-            alpha=0.95,
+            linewidths=1.3,
+            alpha=0.97,
             zorder=3,
         )
-    inset.set_xlim(1.6, 7.35)
-    inset.set_ylim(-0.002, 0.06)
-    inset.tick_params(labelsize=8)
-    inset.set_title("student regime", fontsize=9, pad=4)
 
-    inset_offsets = {
-        "Student Q4 CLS": (7, 7),
-        "Student Q2 CLS": (7, 7),
-        "Student Q4 Mean": (7, -14),
-        "Student Q4 Mean + Proj": (7, 7),
-        "Student Q4 Mean + Distill": (7, 7),
+    zoom_offsets = {
+        "Student Q4 CLS": (8, 7),
+        "Student Q2 CLS": (8, 7),
+        "Student Q4 Mean": (8, -14),
+        "Student Q4 Mean + Proj": (8, 7),
+        "Student Q4 Mean + Distill": (8, 7),
     }
-    for label, (dx, dy) in inset_offsets.items():
+    for label, (dx, dy) in zoom_offsets.items():
         row = by_label[label]
-        inset.annotate(
+        ax_zoom.annotate(
             label.replace("Student ", ""),
             (row["query_p50_ms"], row["mrr_at_10"]),
             textcoords="offset points",
             xytext=(dx, dy),
-            fontsize=8,
+            fontsize=9,
             color="#222222",
         )
 
-    inset_progression = [
+    student_frontier = ["Student Q4 Mean + Proj", "Student Q4 Mean", "Student Q4 Mean + Distill"]
+    ax_zoom.plot(
+        [by_label[l]["query_p50_ms"] for l in student_frontier],
+        [by_label[l]["mrr_at_10"] for l in student_frontier],
+        color="#7b8794",
+        linestyle="--",
+        linewidth=1.6,
+        alpha=0.9,
+        zorder=2,
+    )
+
+    transitions = [
         ("Student Q4 CLS", "Student Q4 Mean", "#7b8794"),
         ("Student Q4 Mean", "Student Q4 Mean + Distill", "#2e8b57"),
         ("Student Q4 Mean", "Student Q4 Mean + Proj", "#c0392b"),
     ]
-    for src_label, dst_label, color in inset_progression:
+    for src_label, dst_label, color in transitions:
         src = by_label[src_label]
         dst = by_label[dst_label]
-        inset.annotate(
+        ax_zoom.annotate(
             "",
             xy=(dst["query_p50_ms"], dst["mrr_at_10"]),
             xytext=(src["query_p50_ms"], src["mrr_at_10"]),
             arrowprops={
                 "arrowstyle": "->",
-                "linewidth": 1.2,
+                "linewidth": 1.3,
                 "color": color,
                 "alpha": 0.9,
-                "shrinkA": 7,
-                "shrinkB": 7,
-                "connectionstyle": "arc3,rad=0.12",
+                "shrinkA": 8,
+                "shrinkB": 8,
+                "connectionstyle": "arc3,rad=0.14",
             },
             zorder=2,
         )
 
-    best = by_label["Student Q4 Mean"]
-    inset.scatter(
-        best["query_p50_ms"],
-        best["mrr_at_10"],
-        s=170,
-        facecolors="none",
-        edgecolors="#14532d",
-        linewidths=1.8,
-        zorder=4,
-    )
-    inset.text(
-        2.05,
-        0.056,
-        "pooling recovers the first usable\nstudent signal",
-        fontsize=7.5,
+    ax_zoom.text(
+        1.92,
+        0.057,
+        "pooling produces the first\nusable student recovery",
+        fontsize=8.7,
         color="#14532d",
         ha="left",
         va="top",
-        bbox={"boxstyle": "round,pad=0.25", "facecolor": "#eef8f1", "edgecolor": "#9bd3ae", "linewidth": 0.8},
+        bbox={"boxstyle": "round,pad=0.24", "facecolor": "#eef8f1", "edgecolor": "#9bd3ae", "linewidth": 0.8},
+    )
+    ax_zoom.set_xlim(1.55, 7.35)
+    ax_zoom.set_ylim(-0.002, 0.06)
+    ax_zoom.set_xlabel("Query encoding latency p50 (ms)", fontsize=12)
+    ax_zoom.text(
+        0.02,
+        1.02,
+        "(b) Student regime zoom",
+        transform=ax_zoom.transAxes,
+        fontsize=12,
+        fontweight="semibold",
+        ha="left",
+        va="bottom",
     )
 
-    mark_inset(ax, inset, loc1=2, loc2=4, fc="none", ec="#9aa5b1", lw=0.9)
+    top_link = ConnectionPatch(
+        xyA=(7.35, 0.06),
+        coordsA=ax_global.transData,
+        xyB=(1.55, 0.06),
+        coordsB=ax_zoom.transData,
+        color="#b8c2cc",
+        linewidth=1.0,
+        alpha=0.9,
+    )
+    bottom_link = ConnectionPatch(
+        xyA=(7.35, -0.002),
+        coordsA=ax_global.transData,
+        xyB=(1.55, -0.002),
+        coordsB=ax_zoom.transData,
+        color="#b8c2cc",
+        linewidth=1.0,
+        alpha=0.9,
+    )
+    fig.add_artist(top_link)
+    fig.add_artist(bottom_link)
 
     legend_handles = []
     seen = set()
-    for family, style in family_styles.items():
+    for style in family_styles.values():
         if style["label"] in seen:
             continue
         seen.add(style["label"])
@@ -335,17 +421,115 @@ def _write_pareto_plot(path: Path, rows: list[dict]) -> None:
                 label=style["label"],
             )
         )
-    ax.legend(
+    fig.legend(
         handles=legend_handles,
-        loc="upper right",
+        loc="upper center",
+        bbox_to_anchor=(0.5, 1.08),
+        ncol=5,
         frameon=True,
         facecolor="white",
         edgecolor="#d0d7de",
         fontsize=9,
     )
 
-    fig.tight_layout()
-    fig.savefig(path, dpi=240, bbox_inches="tight")
+    fig.savefig(path, dpi=260, bbox_inches="tight")
+    plt.close(fig)
+
+
+def _write_ann_plot(path: Path, ann_table_path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.style.use("default")
+
+    ann = pd.read_csv(ann_table_path)
+    style_map = {
+        "flat": {"color": "#245b9f", "marker": "o", "edge": "#16375f"},
+        "hnsw": {"color": "#3b82f6", "marker": "s", "edge": "#1d4ed8"},
+        "ivf": {"color": "#d97706", "marker": "^", "edge": "#92400e"},
+    }
+
+    fig, ax = plt.subplots(figsize=(5.6, 4.2), dpi=260, constrained_layout=True)
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("#fcfcfc")
+    ax.grid(True, which="major", color="#d8dde6", linewidth=0.85, alpha=0.8)
+    ax.grid(True, which="minor", color="#eceff4", linewidth=0.55, alpha=0.75)
+    ax.minorticks_on()
+    ax.set_xscale("log")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    flat_mrr = float(ann.loc[ann["index_type"] == "flat", "mrr_at_10"].iloc[0])
+    ax.axhspan(flat_mrr * 0.92, flat_mrr * 1.01, color="#eef4fb", alpha=0.8, zorder=0)
+    ax.axhline(flat_mrr, color="#7b8794", linestyle="--", linewidth=1.15, alpha=0.85)
+    ax.text(0.18, flat_mrr + 0.00035, "near-exact quality band", fontsize=8.8, color="#6b7280", ha="left")
+
+    for _, row in ann.iterrows():
+        idx = row["index_type"].lower()
+        style = style_map[idx]
+        ax.scatter(
+            row["mean_search_ms"],
+            row["mrr_at_10"],
+            s=120,
+            c=style["color"],
+            marker=style["marker"],
+            edgecolors=style["edge"],
+            linewidths=1.4,
+            zorder=3,
+        )
+
+    label_offsets = {
+        "flat": (6, 4),
+        "hnsw": (6, 8),
+        "ivf": (6, 3),
+    }
+    for _, row in ann.iterrows():
+        idx = row["index_type"].lower()
+        dx, dy = label_offsets[idx]
+        ax.annotate(
+            row["index_type"].upper() if idx != "flat" else "Flat",
+            (row["mean_search_ms"], row["mrr_at_10"]),
+            textcoords="offset points",
+            xytext=(dx, dy),
+            fontsize=10,
+            color=style_map[idx]["edge"],
+            weight="semibold",
+        )
+
+    ivf = ann.loc[ann["index_type"] == "ivf"].iloc[0]
+    hnsw = ann.loc[ann["index_type"] == "hnsw"].iloc[0]
+    ax.annotate(
+        "IVF: $\\sim 3.1\\times$ faster,\nsmall quality drop",
+        xy=(ivf["mean_search_ms"], ivf["mrr_at_10"]),
+        xytext=(0.16, 0.0463),
+        fontsize=8.8,
+        color="#92400e",
+        arrowprops={
+            "arrowstyle": "-|>",
+            "linewidth": 1.1,
+            "color": "#d97706",
+            "connectionstyle": "arc3,rad=-0.15",
+        },
+        bbox={"boxstyle": "round,pad=0.22", "facecolor": "#fff7ed", "edgecolor": "#f59e0b", "linewidth": 0.8},
+    )
+    ax.annotate(
+        "HNSW: much faster,\nquality too low",
+        xy=(hnsw["mean_search_ms"], hnsw["mrr_at_10"]),
+        xytext=(0.055, 0.0344),
+        fontsize=8.5,
+        color="#1d4ed8",
+        arrowprops={
+            "arrowstyle": "-|>",
+            "linewidth": 1.0,
+            "color": "#3b82f6",
+            "connectionstyle": "arc3,rad=0.18",
+        },
+        bbox={"boxstyle": "round,pad=0.2", "facecolor": "#eff6ff", "edgecolor": "#93c5fd", "linewidth": 0.8},
+    )
+
+    ax.set_xlim(0.03, 5.0)
+    ax.set_ylim(0.028, 0.0505)
+    ax.set_xlabel("Mean search latency (ms, log scale)", fontsize=11)
+    ax.set_ylabel("MRR@10", fontsize=11)
+    fig.savefig(path, dpi=260, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -363,7 +547,11 @@ def main() -> None:
     )
     _write_experiment_log(ROOT / "notes" / "experiment_log.md", rows)
     _write_best_student_note(ROOT / "notes" / "best_student_reference.md")
-    _write_pareto_plot(ROOT / "figures" / "pareto_latency_vs_mrr.png", rows)
+    figure_dir = ROOT / "paper" / "figures"
+    _write_pareto_plot(figure_dir / "pareto_latency_vs_mrr.png", rows)
+    ann_table_path = ROOT / "results" / "ann_table.csv"
+    if ann_table_path.exists():
+        _write_ann_plot(figure_dir / "ann_search_latency_vs_mrr.png", ann_table_path)
 
 
 if __name__ == "__main__":

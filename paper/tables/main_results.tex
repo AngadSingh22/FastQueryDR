@@ -8,13 +8,13 @@
 \toprule
 Model & Family & MRR@10 & Recall@100 & Notes \\
 \midrule
-Teacher Zero-Shot & teacher & 0.766997 & 0.988237 & Frozen reference teacher (\texttt{BAAI/bge-base-en-v1.5}, \textsc{cls}) \\
-Teacher Fine-Tune & teacher\_ablation & 0.740860 & 0.983169 & Conservative fine-tuned teacher, still below zero-shot \\
+Teacher Zero-Shot & teacher & 0.766997 & 0.988237 & Frozen \bgebase\ v1.5 reference with \textsc{cls} pooling \\
+Teacher Fine-Tune & teacher ablation & 0.740860 & 0.983169 & Conservative fine-tuned teacher, still below zero-shot \\
 Student Q4 CLS & student & 0.000776 & 0.016888 & Raw 4-layer query truncation collapses quality \\
 Student Q2 CLS & student & 0.000465 & 0.010698 & Raw 2-layer query truncation is weaker still \\
-Student Q4 Mean & student\_best & 0.047922 & 0.249231 & Best student: query-side mean pooling recovers signal \\
-Student Q4 Mean + Proj & student\_ablation & 0.000208 & 0.004516 & Projection head regression \\
-Student Q4 Mean + Distill & student\_ablation & 0.048725 & 0.246582 & Lightweight distillation is near-neutral \\
+Student Q4 Mean & best student & 0.047922 & 0.249231 & Query-side mean pooling recovers the first usable signal \\
+Student Q4 Mean + Proj & student ablation & 0.000208 & 0.004516 & Projection head regression \\
+Student Q4 Mean + Distill & student ablation & 0.048725 & 0.246582 & Lightweight distillation is near-neutral \\
 \bottomrule
 \end{tabular}
 \par}
