@@ -1,0 +1,67 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{karpukhin-etal-2020-dense}
+\citation{reimers-gurevych-2019-sentence}
+\citation{chen-etal-2020-simclr}
+\citation{huang-chen-2024-pairdistill}
+\citation{johnson-etal-2021-faiss}
+\citation{malkov-yashunin-2018-hnsw}
+\citation{thakur-etal-2021-beir}
+\citation{karpukhin-etal-2020-dense}
+\citation{reimers-gurevych-2019-sentence}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dense retrieval as bi-encoding.}{1}{section*.2}\protected@file@percent }
+\citation{chen-etal-2020-simclr}
+\citation{qu-etal-2021-rocketqa}
+\citation{huang-chen-2024-pairdistill}
+\citation{bge-base-en-v15-modelcard}
+\citation{thakur-etal-2021-beir}
+\citation{johnson-etal-2021-faiss}
+\citation{malkov-yashunin-2018-hnsw}
+\@writefile{toc}{\contentsline {paragraph}{Contrastive training and representation heads.}{2}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Embedding teachers and zero-shot evaluation.}{2}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ANN indexing.}{2}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{2}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Asymmetric dense retrieval setup used throughout the student experiments. The query tower is truncated to depth $L_q$, while the document tower remains full-depth and frozen. Similarity is computed by scaled inner product over normalized embeddings.}}{2}{figure.caption.6}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:architecture}{{1}{2}{Asymmetric dense retrieval setup used throughout the student experiments. The query tower is truncated to depth $L_q$, while the document tower remains full-depth and frozen. Similarity is computed by scaled inner product over normalized embeddings}{figure.caption.6}{}}
+\newlabel{fig:architecture@cref}{{[figure][1][]1}{[1][2][]2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Setup}{3}{section.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Experiment ladder for the study: frozen teacher, raw shallow students, low-cost ablations, and then the optional ANN systems extension.}}{3}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:ladder}{{2}{3}{Experiment ladder for the study: frozen teacher, raw shallow students, low-cost ablations, and then the optional ANN systems extension}{figure.caption.7}{}}
+\newlabel{fig:ladder@cref}{{[figure][2][]2}{[1][3][]3}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{3}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Retrieval quality}{4}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Latency and systems behavior}{4}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}ANN tradeoff}{4}{subsection.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces ANN search-latency versus quality on the frozen best student. HNSW is fastest but too lossy; IVF retains much more of the exact-search quality while still reducing mean search latency.}}{4}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:ann-tradeoff}{{3}{4}{ANN search-latency versus quality on the frozen best student. HNSW is fastest but too lossy; IVF retains much more of the exact-search quality while still reducing mean search latency}{figure.caption.8}{}}
+\newlabel{fig:ann-tradeoff@cref}{{[figure][3][]3}{[1][4][]4}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Retrieval quality on the prepared MS MARCO slice. The zero-shot teacher is the frozen reference model. The 4-layer mean-pooling student is the strongest student ablation, but it still trails the teacher by a wide margin.}}{4}{table.caption.9}\protected@file@percent }
+\newlabel{tab:main-results}{{1}{4}{Retrieval quality on the prepared MS MARCO slice. The zero-shot teacher is the frozen reference model. The 4-layer mean-pooling student is the strongest student ablation, but it still trails the teacher by a wide margin}{table.caption.9}{}}
+\newlabel{tab:main-results@cref}{{[table][1][]1}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Transfer check}{4}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{4}{section.6}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{bge-base-en-v15-modelcard}{1}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Online behavior on the prepared benchmark. Query latency changes substantially across query encoders, but end-to-end latency remains dominated by exact corpus search. Peak memory is the measured query-side peak allocation for the benchmark run, reported in MiB for readability.}}{5}{table.caption.10}\protected@file@percent }
+\newlabel{tab:latency-results}{{2}{5}{Online behavior on the prepared benchmark. Query latency changes substantially across query encoders, but end-to-end latency remains dominated by exact corpus search. Peak memory is the measured query-side peak allocation for the benchmark run, reported in MiB for readability}{table.caption.10}{}}
+\newlabel{tab:latency-results@cref}{{[table][2][]2}{[1][4][]5}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Exact FAISS versus approximate indices on the frozen best student. All rows use the same 55{,}578-query benchmark slice. \texttt  {IVF} is the only approximate index that preserves most of the exact-search quality while still reducing mean search latency.}}{5}{table.caption.11}\protected@file@percent }
+\newlabel{tab:ann-results}{{3}{5}{Exact FAISS versus approximate indices on the frozen best student. All rows use the same 55{,}578-query benchmark slice. \texttt {IVF} is the only approximate index that preserves most of the exact-search quality while still reducing mean search latency}{table.caption.11}{}}
+\newlabel{tab:ann-results@cref}{{[table][3][]3}{[1][4][]5}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Limitations}{5}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{5}{section.8}\protected@file@percent }
+\bibcite{chen-etal-2020-simclr}{2}
+\bibcite{huang-chen-2024-pairdistill}{3}
+\bibcite{johnson-etal-2021-faiss}{4}
+\bibcite{karpukhin-etal-2020-dense}{5}
+\bibcite{malkov-yashunin-2018-hnsw}{6}
+\bibcite{qu-etal-2021-rocketqa}{7}
+\bibcite{reimers-gurevych-2019-sentence}{8}
+\bibcite{thakur-etal-2021-beir}{9}
+\gdef \@abspage@last{6}

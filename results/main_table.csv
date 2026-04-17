@@ -1,0 +1,8 @@
+label,family,mrr_at_10,recall_at_100,notes,run_dir
+Teacher Zero-Shot,teacher,0.7669974473169981,0.9882369522712824,Frozen reference teacher,teacher_bge_base_zero_shot_reference_retrieval_20260414_220138
+Teacher Fine-Tune,teacher_ablation,0.740859685544183,0.9831692996029604,Optional fine-tuned teacher ablation,teacher_bge_base_msmarco_finetune_conservative_20260414_221912
+Student Q4 CLS,student,0.0007760579011793521,0.016887677378339152,Raw 4-layer student,student_bge_query4_msmarco_20260415_195330
+Student Q2 CLS,student,0.0004652977340011778,0.010698177936113811,Raw 2-layer student,student_bge_query2_msmarco_20260416_170428
+Student Q4 Mean,student_best,0.047921511138071644,0.24923141051015388,Current best student,student_bge_query4_pool_mean_msmarco_20260416_230108
+Student Q4 Mean + Proj,student_ablation,0.00020788744204484246,0.0045161754651120945,Projection head regression,student_bge_query4_pool_mean_proj256_msmarco_20260416_232922
+Student Q4 Mean + Distill,student_ablation,0.0487254434922577,0.24658228075857352,Lightweight distillation,student_bge_query4_pool_mean_distill_msmarco_20260417_003541

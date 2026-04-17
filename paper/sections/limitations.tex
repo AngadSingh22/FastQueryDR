@@ -1,0 +1,5 @@
+\section{Limitations}
+
+This study is intentionally narrow. The main benchmark is a reduced MS MARCO-derived slice rather than the full passage ranking task, so the reported tradeoffs should be read as controlled experimental evidence rather than a final production ranking claim. Only one teacher backbone is used, and the teacher remains strongest in its zero-shot form. The student space is also small: query truncation, pooling, a single projection-head design, and one lightweight distillation formulation. Other compression strategies, stronger distillation schedules, or better student initialization schemes may behave differently.
+
+The transfer evidence is similarly limited. SciFact is useful as a robustness check, but one BEIR dataset does not establish broad cross-domain behavior. Finally, the ANN study is secondary to the core encoder question. It shows that systems-side approximations can matter once the encoder is frozen, but it does not change the central conclusion that the main difficulty lies in shallow query representation quality.

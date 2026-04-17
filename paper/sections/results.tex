@@ -1,0 +1,41 @@
+\section{Results}
+
+The central result is that the frozen zero-shot teacher remains the strongest point in the study, while naive shallow compression collapses retrieval quality unless the query tower is handled carefully. Table~\ref{tab:main-results} summarizes the quality tradeoffs, Table~\ref{tab:latency-results} summarizes online behavior, and Table~\ref{tab:ann-results} reports the exact-versus-ANN comparison.
+
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{\input{figures/experiment_ladder}}
+\caption{Experiment ladder for the study: frozen teacher, raw shallow students, low-cost ablations, and then the optional ANN systems extension.}
+\label{fig:ladder}
+\end{figure}
+
+\subsection{Retrieval quality}
+
+The frozen teacher reference, \texttt{BAAI/bge-base-en-v1.5} with \textsc{cls} pooling, achieves $\mathrm{MRR}@10 = 0.766997$ and $\mathrm{Recall}@100 = 0.988237$ on the prepared MS MARCO slice. The conservative fine-tuned teacher remains slightly worse at $0.740860 / 0.983169$, so the paper uses the zero-shot model as the teacher reference rather than the fine-tuned ablation.
+
+The shallow student results show a large quality cliff. The raw 4-layer student reaches only $0.000776 / 0.016888$, and the 2-layer student is even weaker at $0.000465 / 0.010698$. This is the clearest evidence that naive query truncation is not a viable compression strategy under the current setup.
+
+Among the student ablations, query-side mean pooling is the first clearly positive intervention. The 4-layer student with mean pooling improves to $0.047922 / 0.249231$, which is still far below the teacher but is orders of magnitude better than the raw shallow student. The query projection head is a regression: it drops to $0.000208 / 0.004516$. Lightweight distillation is near-neutral relative to the pooling-only student, nudging $\mathrm{MRR}@10$ to $0.048725$ while slightly lowering $\mathrm{Recall}@100$ to $0.246582$.
+
+\subsection{Latency and systems behavior}
+
+The latency measurements in Table~\ref{tab:latency-results} show that the student-side query encoder can be made materially cheaper, but exact end-to-end retrieval is still dominated by corpus search. The best 4-layer mean-pooling student reduces query p50 latency to $1.819$\,ms from $3.089$\,ms for the frozen teacher, yet end-to-end p50 latency remains similar at $25.243$\,ms versus $23.567$\,ms. The 2-layer student is faster than the teacher at query time, but its retrieval quality is too poor to justify the stronger compression. The projection-head and distillation variants do not meaningfully change the systems picture.
+
+\subsection{ANN tradeoff}
+
+Table~\ref{tab:ann-results} compares exact FAISS search against two approximate indices on the frozen best student. \texttt{HNSW} yields the fastest mean search time at $0.038$\,ms, but its retrieval quality drops sharply to $0.032009 / 0.147751$, which is too large a loss for the present study. \texttt{IVF} is the only ANN variant with a defensible tradeoff: it preserves much more of the exact-search quality at $0.044107 / 0.223453$ while reducing mean search time to $1.151$\,ms from $3.579$\,ms for exact search. For this benchmark, \texttt{IVF} is the only approximate index worth mentioning as a plausible systems compromise.
+
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{\input{figures/ann_tradeoff_plot}}
+\caption{ANN search-latency versus quality on the frozen best student. HNSW is fastest but too lossy; IVF retains much more of the exact-search quality while still reducing mean search latency.}
+\label{fig:ann-tradeoff}
+\end{figure}
+
+\subsection{Transfer check}
+
+As a small robustness check, the frozen best student transfers to SciFact with $\mathrm{MRR}@10 = 0.040016$ and $\mathrm{Recall}@100 = 0.326111$ on the BEIR evaluation run. This is far below the MS MARCO teacher reference, but it confirms that the student remains usable outside the in-domain benchmark.
+
+\input{tables/main_results}
+\input{tables/latency_results}
+\input{tables/ann_results}

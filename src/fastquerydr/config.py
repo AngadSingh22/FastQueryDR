@@ -19,9 +19,13 @@ class ModelConfig:
     encoder_name: str
     architecture: str = "symmetric"
     pooling: str = "mean"
+    query_pooling: Optional[str] = None
+    passage_pooling: Optional[str] = None
     normalize: bool = True
     query_num_hidden_layers: Optional[int] = None
     freeze_document_encoder: bool = False
+    query_projection_dim: Optional[int] = None
+    query_projection_activation: str = "gelu"
 
 
 @dataclass
@@ -84,12 +88,24 @@ class RetrievalSelectionConfig:
 
 
 @dataclass
+class DistillationConfig:
+    enabled: bool = False
+    teacher_encoder_name: Optional[str] = None
+    teacher_checkpoint_path: Optional[str] = None
+    teacher_query_pooling: str = "cls"
+    teacher_passage_pooling: str = "cls"
+    loss_weight: float = 1.0
+    temperature: float = 1.0
+
+
+@dataclass
 class AppConfig:
     experiment: ExperimentConfig
     model: ModelConfig
     data: DataConfig
     training: TrainingConfig
     retrieval: Optional[RetrievalConfig] = None
+    distillation: Optional[DistillationConfig] = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -119,4 +135,5 @@ def load_config(path: str | Path) -> AppConfig:
             if "retrieval" in raw
             else None
         ),
+        distillation=DistillationConfig(**raw["distillation"]) if "distillation" in raw else None,
     )

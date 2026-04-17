@@ -13,11 +13,16 @@ src/fastquerydr/data/retrieval.py
 src/fastquerydr/models/__init__.py
 src/fastquerydr/models/bi_encoder.py
 src/fastquerydr/retrieval/__init__.py
+src/fastquerydr/retrieval/ann_eval.py
 src/fastquerydr/retrieval/index.py
 src/fastquerydr/retrieval/latency.py
 src/fastquerydr/retrieval/metrics.py
 src/fastquerydr/retrieval/pipeline.py
+src/fastquerydr/retrieval/probe.py
 src/fastquerydr/training/__init__.py
+src/fastquerydr/training/beir_eval.py
+src/fastquerydr/training/export_examples.py
+src/fastquerydr/training/generate_artifacts.py
 src/fastquerydr/training/latency_benchmark.py
 src/fastquerydr/training/retrieval_eval.py
 src/fastquerydr/training/train.py

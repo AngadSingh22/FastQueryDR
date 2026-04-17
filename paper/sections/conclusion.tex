@@ -1,0 +1,5 @@
+\section{Conclusion}
+
+This paper studied online-efficient dense retrieval through the specific lens of asymmetric query compression. On a fixed MS MARCO-derived benchmark, a frozen zero-shot \texttt{BAAI/bge-base-en-v1.5} model remained the strongest teacher reference. Naive 4-layer and 2-layer query truncation caused catastrophic quality collapse. Query-side mean pooling yielded the first clear recovery for a shallow student, while the tested projection head hurt and lightweight distillation remained close to neutral. In the later systems comparison, IVF emerged as the only ANN option that preserved enough retrieval quality to be a plausible tradeoff against exact flat search.
+
+The main conclusion is therefore narrow and practical. Query-side compression is not well approximated by simple truncation, and the first useful gains come from internal representation choices rather than from increasingly elaborate systems tricks. The remaining gap to the teacher is still large, which makes stronger distillation, better student architectures, or more careful shallow-query design the natural next research directions.

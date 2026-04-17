@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Optional
 
 import torch
+import torch.nn.functional as F
 from torch import nn
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
@@ -22,6 +23,13 @@ from fastquerydr.retrieval.metrics import mean_reciprocal_rank_at_k, recall_at_k
 from fastquerydr.retrieval.pipeline import encode_texts, rank_documents
 from fastquerydr.retrieval.probe import RetrievalProbe, build_retrieval_probe
 from fastquerydr.utils.repro import prepare_run_dir, seed_everything, select_device
+
+
+class DistillationState:
+    def __init__(self, teacher_model: nn.Module, temperature: float, loss_weight: float) -> None:
+        self.teacher_model = teacher_model
+        self.temperature = temperature
+        self.loss_weight = loss_weight
 
 
 def parse_args() -> argparse.Namespace:
@@ -68,21 +76,79 @@ def build_dataloaders(config: AppConfig, tokenizer):
     return train_loader, val_loader
 
 
-def compute_loss(model: nn.Module, batch: dict[str, dict[str, torch.Tensor]], criterion: nn.Module) -> torch.Tensor:
+def build_distillation_state(config: AppConfig, device: torch.device) -> Optional[DistillationState]:
+    if config.distillation is None or not config.distillation.enabled:
+        return None
+    teacher_encoder_name = config.distillation.teacher_encoder_name or config.model.encoder_name
+    if teacher_encoder_name != config.model.encoder_name:
+        raise ValueError("Current distillation path assumes teacher and student share the same tokenizer/model family")
+    teacher_model = build_bi_encoder(
+        config.model.__class__(
+            encoder_name=teacher_encoder_name,
+            architecture="symmetric",
+            pooling=config.model.pooling,
+            query_pooling=config.distillation.teacher_query_pooling,
+            passage_pooling=config.distillation.teacher_passage_pooling,
+            normalize=config.model.normalize,
+        )
+    ).to(device)
+    if config.distillation.teacher_checkpoint_path is not None:
+        state_dict = torch.load(config.distillation.teacher_checkpoint_path, map_location=device)
+        teacher_model.load_state_dict(state_dict)
+    teacher_model.eval()
+    for parameter in teacher_model.parameters():
+        parameter.requires_grad = False
+    return DistillationState(
+        teacher_model=teacher_model,
+        temperature=config.distillation.temperature,
+        loss_weight=config.distillation.loss_weight,
+    )
+
+
+def compute_loss(
+    model: nn.Module,
+    batch: dict[str, dict[str, torch.Tensor]],
+    criterion: nn.Module,
+    distillation_state: Optional[DistillationState] = None,
+) -> tuple[torch.Tensor, dict[str, float]]:
     query_embeddings = model.encode_query(batch["query_inputs"])
     positive_embeddings = model.encode_passage(batch["positive_inputs"])
     logits = model.similarity(query_embeddings, positive_embeddings)
     labels = torch.arange(logits.size(0), device=logits.device)
-    return criterion(logits, labels)
+    contrastive_loss = criterion(logits, labels)
+    losses = {"contrastive_loss": float(contrastive_loss.detach().item())}
+
+    if distillation_state is None:
+        return contrastive_loss, losses
+
+    with torch.no_grad():
+        teacher_query_embeddings = distillation_state.teacher_model.encode_query(batch["query_inputs"])
+        teacher_passage_embeddings = distillation_state.teacher_model.encode_passage(batch["positive_inputs"])
+        teacher_logits = distillation_state.teacher_model.similarity(teacher_query_embeddings, teacher_passage_embeddings)
+
+    temperature = distillation_state.temperature
+    student_log_probs = F.log_softmax(logits / temperature, dim=-1)
+    teacher_probs = F.softmax(teacher_logits / temperature, dim=-1)
+    distillation_loss = F.kl_div(student_log_probs, teacher_probs, reduction="batchmean") * (temperature**2)
+    total_loss = contrastive_loss + distillation_state.loss_weight * distillation_loss
+    losses["distillation_loss"] = float(distillation_loss.detach().item())
+    losses["total_loss"] = float(total_loss.detach().item())
+    return total_loss, losses
 
 
 @torch.no_grad()
-def evaluate(model: nn.Module, loader: DataLoader, criterion: nn.Module, device: torch.device) -> float:
+def evaluate(
+    model: nn.Module,
+    loader: DataLoader,
+    criterion: nn.Module,
+    device: torch.device,
+    distillation_state: Optional[DistillationState] = None,
+) -> float:
     model.eval()
     losses: list[float] = []
     for batch in loader:
         batch = move_batch_to_device(batch, device)
-        loss = compute_loss(model, batch, criterion)
+        loss, _ = compute_loss(model, batch, criterion, distillation_state=distillation_state)
         losses.append(loss.item())
     model.train()
     return sum(losses) / len(losses)
@@ -168,6 +234,7 @@ def main() -> None:
     tokenizer = AutoTokenizer.from_pretrained(config.model.encoder_name)
     train_loader, val_loader = build_dataloaders(config, tokenizer)
     retrieval_probe = build_training_probe(config)
+    distillation_state = build_distillation_state(config, device)
 
     model = build_bi_encoder(config.model).to(device)
 
@@ -213,7 +280,7 @@ def main() -> None:
             batch = move_batch_to_device(batch, device)
 
             with torch.amp.autocast(device_type=device.type, enabled=config.training.mixed_precision and device.type == "cuda"):
-                loss = compute_loss(model, batch, criterion)
+                loss, loss_components = compute_loss(model, batch, criterion, distillation_state=distillation_state)
                 scaled_loss = loss / config.training.grad_accumulation_steps
 
             scaler.scale(scaled_loss).backward()
@@ -230,7 +297,7 @@ def main() -> None:
                 progress.set_postfix(epoch=epoch + 1, loss=f"{loss.item():.4f}")
 
             if global_step % config.training.eval_every_steps == 0:
-                val_loss = evaluate(model, val_loader, criterion, device)
+                val_loss = evaluate(model, val_loader, criterion, device, distillation_state=distillation_state)
                 lowest_val_loss = min(lowest_val_loss, val_loss)
                 retrieval_metrics = (
                     evaluate_retrieval_probe(model=model, tokenizer=tokenizer, config=config, probe=retrieval_probe, device=device)
@@ -251,6 +318,8 @@ def main() -> None:
                     non_improving_evals += 1
 
                 message = f"step={global_step} train_loss={loss.item():.4f} val_loss={val_loss:.4f}"
+                if "distillation_loss" in loss_components:
+                    message += f" distill_loss={loss_components['distillation_loss']:.4f}"
                 if retrieval_metrics is not None:
                     message += (
                         f" retrieval_mrr_at_10={retrieval_metrics['retrieval_mrr_at_10']:.4f}"
@@ -282,7 +351,7 @@ def main() -> None:
         if stop_training:
             break
 
-    final_val_loss = evaluate(model, val_loader, criterion, device)
+    final_val_loss = evaluate(model, val_loader, criterion, device, distillation_state=distillation_state)
     torch.save(model.state_dict(), run_dir / "last_model.pt")
     final_retrieval_metrics = (
         evaluate_retrieval_probe(model=model, tokenizer=tokenizer, config=config, probe=retrieval_probe, device=device)

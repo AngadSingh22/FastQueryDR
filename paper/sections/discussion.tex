@@ -1,0 +1,9 @@
+\section{Discussion}
+
+The dominant pattern in these experiments is not a clean compression success story. It is a brittleness story. Once query depth is truncated naively, most of the teacher--student gap appears immediately, and that gap is large enough that subsequent low-cost interventions operate in a damaged regime rather than near the teacher frontier.
+
+This behavior matters for two reasons. First, it clarifies that online-efficient dense retrieval should not be framed only as a latency problem. It is a representation problem whose failure modes appear before the search backend becomes the main bottleneck. Second, it explains why query-side pooling emerges as the first useful intervention: once the query tower is shallow, preserving token information in the final sentence representation becomes more important than simply inheriting the teacher's default end-of-tower behavior.
+
+The negative projection-head result is also informative. In richer contrastive settings, a projection head can reshape the representation space without harming the underlying encoder. Here, the same idea appears to introduce extra mismatch against a frozen full-depth document tower. The lightweight distillation result points in a similar direction. Distillation helps only marginally when the student base representation is already too weak, suggesting that stronger student architecture or richer teacher signals may be needed before KL-based imitation can close the gap.
+
+The ANN comparison should also be interpreted carefully. It does not rescue a weak student. Instead, it shows what can still be gained once the encoder is fixed. HNSW offers the most aggressive search-speed improvement but loses too much retrieval quality. IVF is the only ANN variant that moves the latency side of the tradeoff without rewriting the paper's qualitative conclusion.

@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Online behavior on the prepared benchmark. Query latency changes substantially across query encoders, but end-to-end latency remains dominated by exact corpus search. Peak memory is the measured query-side peak allocation for the benchmark run, reported in MiB for readability.}
+\label{tab:latency-results}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+Model & Family & Query p50 (ms) & Query p95 (ms) & End-to-end p50 (ms) & End-to-end p95 (ms) & Peak memory (MiB) \\
+\midrule
+Teacher Zero-Shot & teacher & 3.089 & 3.199 & 23.567 & 23.821 & 429.25 \\
+Teacher Fine-Tune & teacher\_ablation & 3.075 & 3.213 & 23.837 & 24.243 & 1690.83 \\
+Student Q4 CLS & student & 7.171 & 8.206 & 31.239 & 32.680 & 0.06 \\
+Student Q2 CLS & student & 4.107 & 4.478 & 24.800 & 25.405 & 0.06 \\
+Student Q4 Mean & student\_best & 1.819 & 1.991 & 25.243 & 26.183 & 1662.73 \\
+Student Q4 Mean + Proj & student\_ablation & 1.848 & 1.957 & 24.822 & 25.105 & 1669.84 \\
+Student Q4 Mean + Distill & student\_ablation & 1.824 & 1.999 & 23.172 & 23.902 & 2079.23 \\
+\bottomrule
+\end{tabular}
+\par}
+\end{table}

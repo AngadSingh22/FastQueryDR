@@ -1,0 +1,58 @@
+\section{Method}
+
+We study an asymmetric dense retriever with a full-depth document encoder and a compressed query encoder. Let $q$ denote a query and $d$ denote a document. The query tower is truncated to depth $L_q \in \{2,4\}$, while the document tower remains full depth and is frozen for all student experiments. For a text input $x$, each tower produces hidden states
+$
+H_r(x) \in \mathbb{R}^{T \times h}
+$
+with attention mask $m(x)$, where $r \in \{q,d\}$ indexes the query or document encoder.
+
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{\input{figures/asymmetric_architecture}}
+\caption{Asymmetric dense retrieval setup used throughout the student experiments. The query tower is truncated to depth $L_q$, while the document tower remains full-depth and frozen. Similarity is computed by scaled inner product over normalized embeddings.}
+\label{fig:architecture}
+\end{figure}
+
+We pool hidden states with a low-cost operator $p_\rho(\cdot)$, where $\rho \in \{\mathrm{cls}, \mathrm{mean}\}$. The pooled vector is optionally transformed by a query-side projection head $g_\phi$ and then $\ell_2$-normalized:
+\begin{align}
+z_q(q) &= \mathrm{norm}\!\left(g_\phi\!\left(p_{\rho_q}\!\left(H_q(q), m(q)\right)\right)\right), \\
+z_d(d) &= \mathrm{norm}\!\left(p_{\rho_d}\!\left(H_d(d), m(d)\right)\right).
+\end{align}
+In the symmetric teacher, the same backbone is used on both sides; in the asymmetric students, only the query encoder is truncated and only the query side may use a projection head.
+
+Retrieval scores are scaled inner products:
+\begin{equation}
+s(q,d) = \alpha\, z_q(q)^\top z_d(d), \qquad \alpha = \exp(\tau),
+\end{equation}
+where $\tau$ is a learned log-temperature. This matches the study setup: normalized embeddings, inner-product similarity, and a learned scalar scale parameter.
+
+Training uses an in-batch contrastive objective over positive query--document pairs. For a batch $\{(q_i, d_i^+)\}_{i=1}^B$, the logits are
+\begin{equation}
+\ell_{ij} = s(q_i, d_j^+),
+\end{equation}
+and the loss is
+\begin{equation}
+\mathcal{L}_{\mathrm{ctr}} = -\frac{1}{B}\sum_{i=1}^B \log \frac{\exp(\ell_{ii})}{\sum_{j=1}^B \exp(\ell_{ij})}.
+\end{equation}
+This is the only training signal for the baseline student and teacher fine-tuning runs.
+
+When distillation is enabled, the student is regularized to match a frozen teacher similarity distribution over the same batch. Let $\ell^{S}_{ij}$ and $\ell^{T}_{ij}$ denote student and teacher logits. With distillation temperature $T$, the per-query distributions are
+\begin{equation}
+p^{S}_{i} = \mathrm{softmax}\!\left(\ell^{S}_{i\cdot}/T\right), \qquad
+p^{T}_{i} = \mathrm{softmax}\!\left(\ell^{T}_{i\cdot}/T\right),
+\end{equation}
+and the distillation term is
+\begin{equation}
+\mathcal{L}_{\mathrm{KL}} = \frac{T^2}{B}\sum_{i=1}^B \mathrm{KL}\!\left(p^T_i \,\|\, p^S_i\right).
+\end{equation}
+The total objective is
+\begin{equation}
+\mathcal{L} = \mathcal{L}_{\mathrm{ctr}} + \lambda_{\mathrm{distill}} \mathcal{L}_{\mathrm{KL}},
+\end{equation}
+with $\lambda_{\mathrm{distill}} = 0$ for non-distilled runs.
+
+Online cost is decomposed into query encoding and approximate or exact search:
+\begin{equation}
+T_{\mathrm{e2e}}(q) = T_{\mathrm{encode}}(q) + T_{\mathrm{search}}(q).
+\end{equation}
+In our measurements, $T_{\mathrm{encode}}$ is batch-size-1 query encoding latency and $T_{\mathrm{search}}$ is FAISS search latency against a fixed corpus index. We report p50 and p95 over a fixed query sample and separate the corpus indexing cost from query-time cost so the systems tradeoff is explicit.

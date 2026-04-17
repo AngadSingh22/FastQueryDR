@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Exact FAISS versus approximate indices on the frozen best student. All rows use the same 55{,}578-query benchmark slice. \texttt{IVF} is the only approximate index that preserves most of the exact-search quality while still reducing mean search latency.}
+\label{tab:ann-results}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llrrrrrl}
+\toprule
+Index & MRR@10 & Recall@100 & Build (s) & Search (s) & Mean search (ms) & Queries & Notes \\
+\midrule
+Flat & 0.047922 & 0.249231 & 0.450 & 198.904 & 3.579 & 55{,}578 & Exact FAISS baseline \\
+HNSW & 0.032009 & 0.147751 & 32.043 & 2.108 & 0.038 & 55{,}578 & Fastest search, but large quality drop \\
+IVF & 0.044107 & 0.223453 & 3.285 & 63.974 & 1.151 & 55{,}578 & Moderate speedup with smaller quality loss \\
+\bottomrule
+\end{tabular}
+\par}
+\end{table}

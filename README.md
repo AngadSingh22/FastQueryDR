@@ -17,6 +17,23 @@ Initial scaffold for studying online-efficient dense retrieval via asymmetric qu
   [configs/student_query4_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_msmarco.yaml)
   [configs/student_query2_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query2_msmarco.yaml)
 
+## Phase 5 Direction
+
+- Official BGE usage is `cls` pooling, so the passage tower and frozen teacher should stay on `cls`.
+- The first Phase 5 ablation is therefore query-side pooling only, not a global pooling change.
+- The first implemented config is [configs/student_query4_pool_mean_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_msmarco.yaml), which keeps passage pooling on `cls` and switches only the 4-layer query tower to `mean`.
+- The next implemented ablation is a query-only projection head on top of that improved pooled student:
+  [configs/student_query4_pool_mean_proj256_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_proj256_msmarco.yaml)
+- Harder negatives and distillation remain later training-family interventions.
+
+## Phase 6 Direction
+
+- The first distillation variant is intentionally lightweight.
+- It keeps the current best student architecture fixed and adds only a teacher-student KL term on the in-batch similarity matrix.
+- Teacher: frozen zero-shot BGE with `cls` pooling on both sides.
+- Config:
+  [configs/student_query4_pool_mean_distill_msmarco.yaml](/home/cis-lab/Angad%20Singh%20Ahuja/Cloned%20Repositeries/Private/FastQueryDR/configs/student_query4_pool_mean_distill_msmarco.yaml)
+
 ## Phase 1 Decisions
 
 - Teacher encoder: `BAAI/bge-base-en-v1.5`
